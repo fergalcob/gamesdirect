@@ -11,11 +11,13 @@
   * [Site Goals](#site-goals)
   * [Project Goals](#project-goals)
 - [Development Methodology](#development-methodology)
-  * [Initial Set Up And MVP](#initial-set-up-and-mvp)
-  * [Base Functionality](#base-functionality)
-  * [User Access](#user-access)
-  * [User Profile Functionality](#user-profile-functionality)
-  * [Content Sections](#content-sections)
+  * [Initial Project Creation](#initial-project-creation)
+  * [User Management](#user-management)
+  * [Project Data](#project-data)
+  * [Wishlists](#wishlists)
+  * [Newsletter Subscriptions](#newsletter-subscriptions)
+  * [Cart Functionality](#cart-functionality)
+  * [Checkout Functionality](#checkout-functionality)
   * [Site Responsiveness](#site-responsiveness)
 - [Design Visualization](#design-visualization)
   * [Wireframes](#wireframes)
@@ -83,40 +85,54 @@ To implement full CRUD functionality which is accessible to standard users acces
 
 The project was developed using an Agile methodology with a number of Epics in place and the User Stories arising from them. These User Stories and Epics were kept track of in the Github Project Board found [here](https://github.com/users/fergalcob/projects/1/). The following User Stories and Epics were expanded upon within the project board to encompass the tasks that would need to take place to accomplish them:
 
-#### Initial Set Up And MVP
+#### Initial Project Creation
 
 * As a developer I need to be able to set up and create a new Django app before continuing
 * As a developer I need to have a Minimum Viable Product to continue development
-* As a developer I want to be able to store user and game data in order to be able to provide a useful site
+* As a developer I need to be able to set up and create a new Django app before continuing
 
-#### Base Functionality
+#### User Management
 
-* As a developer I want to be able to provide user's with a home page to act as a landing page for the site
-* As a developer I want to be able to search for games easily and get the correct results
+* As a user I want to be able to create an account via the site
+* As a user I want to be able to log in to the website
+* As a user I want my email address to be verifiable for additional security
+* As a user I want to be able to reset/change my password
+* As a user I want to be able to change my email address if necessary
 
-#### User Access
+#### Project Data
 
-* As a user I want to be able to register an account for the site to post content
-* As a user I want to be able to sign in after registering an account
-* As a user I would like to be able to sign out of my account once I have signed in
-* As the developer I want the site to acknowledge that the user has logged in successfully
+* As a developer I want to have specific models in place to hold data for use in project
+* As a developer I want to have a dataset for use by users to the site
+* As a user I want to be able to find games released on a specific platform
+* As a user I want to be able to search for specific products on the site
+* As a user I want to be able to search and filter within the products displayed
+* As a user I want to be able to view additional information regarding specific products
 
-#### User Profile Functionality
+#### Wishlists
 
-* As a user I would like to be able to change my password
-* As a user I would like to be able to update my profile details
-* As a user I would like to be able to set a profile picture
+* As a developer I need to be able to store user wishlists for future visibility
+* As a user I want to be able to view my wishlist at any time
+* As a user I want to be able to add items to my wishlist when browsing the site
+* As a user I want to be able to remove items from my wishlist when browsing the site
 
-#### User Content
+#### Newsletter Subscriptions
 
-* As a user I would like to be able to add reviews and comments about games I've played
-* As a user I would like to be able to keep a collection of my games
-* As a user I would like to be able to create collections to share with others
+* As a developer I need to set up a Mailchimp account for Marketing API functionality to be used
+* As a user I want to be able to sign up for a newsletter through the site
 
-#### Content Sections
+#### Cart Functionality
 
-* I want to be able to find other games within the same genre
-* I want to be able to find other games made by the same company
+* As a developer I need to be able to store the items that are added to a users cart
+* As a user I want to be able to add items to my cart when browsing the site
+* As a user I want to be able to update the quantity of items for a specific product in my cart
+* As a user I want to be able to remove items from my cart directly
+
+#### Checkout Functionality
+
+* As a developer I want to have a payment processor in place to handle checkout
+* As a user I want to be able to pay for items added to my cart
+* As a user I want to be able to know the status of the payment made via Stripe
+* As a user I want to be notified of my payment status via email if there are any delays in the payment flow
 
 #### Site Responsiveness
 
