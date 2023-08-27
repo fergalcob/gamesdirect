@@ -50,8 +50,7 @@
 
 ## App Goals
 
-Game|DB is a primarily Django based project, part of the Code Institute Project Portfolio 4. The aim of this site is to allow users with an interest in gaming a space to discover new games and share their own favourites. The site is intended to foster a community through its use of collections shared by users and by the users being able to interact through the use of reviews/comments.
-
+GamesDirect is a primarily Django based project, part of the Code Institute Project Portfolio 5. The aim of this site is to allow users with an interest in gaming a storefront to purchase games from a number of the current most popular platforms. I have integrated this project with both Stripe and Mailchimp to enhance the e-commerce offerings available through the site via newsletters and allowing for direct purchases to be made through the storefront using Stripe Checkout.
 
 ### Site Strategy
 
@@ -59,25 +58,23 @@ Game|DB is a primarily Django based project, part of the Code Institute Project 
 
 * Users with an interest in gaming
 
-* Users who want to be part of a community and share their views & gaming interests with others
+* Users who would be interested primarily in purchasing digital content in place of physical games
 
-* Users who would be regularly returning to the site to the contribute to the continued growth of the site
+* Users who would be regularly returning to the site to check for new products/items on sale
 
 #### Site Goals
 
 * For users to be able to create an account for themselves
 
-* For users to be able to share reviews/comments with others
-
-* For users to be able to create collections of games to share with others
-
-* For users to be able to set their own profile data including personal profile pictures
+* For users to be able to create a wishlist for themselves to encourage return visits to the site
 
 * To provide up to date information to users when they access the site
 
+* To give users further information when not browsing the site via a site newsletter containing offers, updates, etc.
+
 #### Project Goals
 
-To provide a site that is both informative and to users who share the same interest and gives the users an incentive to return to the site on a regular basis to foster a sense of community among users through the content they create.
+To provide a storefront to users providing digital download keys to gaming focused users. To encourage repeat interactions with the site, regular sales would be implemented which are clearly indicated to the user when viewing the products available on the site.
 
 To implement full CRUD functionality which is accessible to standard users accessing the site normally in addition to superusers through the admin site
 
