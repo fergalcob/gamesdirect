@@ -83,7 +83,7 @@ To implement full CRUD functionality which is accessible to standard users acces
 
 ### Development Methodology
 
-The project was developed using an Agile methodology with a number of Epics in place and the User Stories arising from them. These User Stories and Epics were kept track of in the Github Project Board found [here](https://github.com/users/fergalcob/projects/1/). The following User Stories and Epics were expanded upon within the project board to encompass the tasks that would need to take place to accomplish them:
+The project was developed using an Agile methodology with a number of Epics in place and the User Stories arising from them. These User Stories and Epics were kept track of in the Github Project Board found [here](https://github.com/users/fergalcob/projects/2). The following User Stories and Epics were expanded upon within the project board to encompass the tasks that would need to take place to accomplish them:
 
 #### Initial Project Creation
 
