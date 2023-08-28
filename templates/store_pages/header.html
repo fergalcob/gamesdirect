@@ -1,0 +1,88 @@
+{% load get_consoles %}
+
+{% get_consoles as get_consoles_data %}
+{% block topbar %}
+<div class="container-fluid">
+<nav class="navbar navbar-direction navbar-expand-lg fixed-top p-2">
+  
+    <div class="d-flex w-100 mt-2">
+    <h1 class="mt-2"><a class="navbar-brand navbar-brand-dark" href="{% url 'index' %}">GamesDirect</a></h1>
+
+    <div class="w-100">
+    <ul class="nav justify-content-end">
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <div class="dropdown">
+          <a href="#" class=" nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-user"></i>
+          </a>
+  
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+            <li><a href="{% url 'change_details' %}" class="dropdown-item p-2">Change My Details</a></li>
+            <li><a href="{% url 'my_orders' %}" class="dropdown-item p-2">My Orders</a></li>
+            <li><a href="{% url 'my_wishlist' %}" class="dropdown-item p-2">My Wishlist</a></li>
+            <li><a href="{% url 'account_logout' %}" class="dropdown-item p-2">Sign Out</a></li>
+          </ul>
+        </div></li>
+        {% else %}
+        <li class="nav-item">
+          <div class="dropdown ">
+            <a href="#" class="nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-user"></i>
+            </a>
+    
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+              <li><a href="{% url 'account_login' %}" class="nav-link">Sign In</a></li>
+              <li><a href="{% url 'account_signup' %}" class="nav-link">Sign Up</a></li>
+
+            </ul>
+          </div></li>
+      {% endif %}
+      <li class="nav-item mx-1 ">   <button class="navbar-toggler d-inline" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+        <span ><i class="fa-solid fa-cart-shopping"></i></span>
+      </button></li> 
+    </ul>
+  </div>
+  <a class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span ><i class="fa-solid fa-bars"></i></span>
+  </a>
+  </div>
+  <div class="row mt-2 mb-3"><div class="col-12 "><form class="form-inline my-2 my-lg-0 pe-2" action="{% url 'games' %}" method="post"> {% csrf_token %} <label><input type="text" name="search_query" class=" search-field p-2" placeholder="Search for games"></label><button id="search_button" type="submit" class="btn"><i class="fa-solid fa-magnifying-glass me-3" style="color: #eeeeee;"></i></button></form></div></div>
+  <div class="row my-2 w-100">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto w-100 justify-content-around">
+        {% for consoles in get_consoles_data %}
+        <li class="nav-item ">
+        <a class="nav-link" href="{% url 'games' %}?platform={{ consoles.slug }}">
+        {{ consoles.name }}
+        </a>
+      </li>
+        {% endfor %}
+
+
+    </ul>
+
+  </div>
+
+</nav>
+  </div>
+
+
+
+
+
+<div class="container-fluid">
+  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasNavbarLabel">My Cart</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+{% include "store_pages/side_cart.html" %}
+</div>
+  </div>
+</div>
+{% endblock %}
