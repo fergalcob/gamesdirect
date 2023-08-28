@@ -393,3 +393,29 @@ def add_to_cart(request):
     test_cart.save()
 
     return JsonResponse({'current_total_json':list("current_total"), 'current_cart':list("product_list")})
+
+def remove_from_cart(request):
+    remove_item = request.POST['cart_item_id']
+    get_user_cart = CurrentCart.objects.get(owner=request.user)
+    cart_item_confirmation = next((item for item in get_user_cart.cart_items['current_cart'].copy() if item['item_id'] == int(remove_item)), None)
+    get_user_cart.cart_items['current_cart'].remove(cart_item_confirmation)
+    get_user_cart.total_price = calculate_total(get_user_cart.cart_items['current_cart'])
+    get_user_cart.save()
+    return JsonResponse({'current_total_json':list("current_total"), 'current_cart':list("product_list")})
+
+def update_cart(request):
+    new_quantity = request.POST['item_quantity']
+    print(new_quantity)
+    if int(new_quantity) == 0:
+        remove_from_cart(request)
+    else:
+        update_item = request.POST['cart_item_id']
+        get_user_cart = CurrentCart.objects.get(owner=request.user)
+        get_item_stock = Game.objects.get(id = request.POST['cart_item_id'])
+        cart_item_confirmation = next((item for item in get_user_cart.cart_items['current_cart'].copy() if item['item_id'] == int(update_item)), None)
+        if int(new_quantity) <= len(get_item_stock.keys_in_stock):
+            cart_item_confirmation['item_quantity'] = new_quantity
+        get_user_cart.total_price = calculate_total(get_user_cart.cart_items['current_cart'])
+        get_user_cart.save()
+    
+    return JsonResponse({'current_total_json':list("current_total"), 'current_cart':list("product_list")})
