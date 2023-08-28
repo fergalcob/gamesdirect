@@ -1,0 +1,109 @@
+{% extends "store_pages/base_template.html" %}
+{% block content %}
+
+<div>
+    <h1>{{ product.name }}</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-7">
+<section id="main-carousel" class="splide" aria-labelledby="carousel-heading">
+    <div class="splide__track">
+    <ul class="splide__list">
+        {% if product_videos %}
+        {% for videos in product_videos %}
+        <li class="splide__slide"><iframe src="https://www.youtube.com/embed/{{ videos.video_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="w-100 h-100"></iframe></li>
+        {% endfor %}
+        {% endif %}
+        {% if product_screenshots %}
+        {% for screenshots in product_screenshots %}
+        <li class="splide__slide"><img src="{{ screenshots.url }}" class="w-100" alt="..."></li>
+{% endfor %}
+        {% endif %}
+</ul>
+</div>
+</section>
+    <section id="thumbnail-carousel" class="splide mt-3" aria-labelledby="carousel-heading">
+        <div class="splide__track">
+		<ul class="splide__list">
+            {% if product_videos %}
+            {% for videos in product_videos %}
+            <li class="splide__slide"><img src="https://img.youtube.com/vi/{{ videos.video_id }}/mqdefault.jpg" class="w-100" alt="..."></li>
+            {% endfor %}
+            {% endif %}
+            {% if product_screenshots %}
+            {% for screenshots in product_screenshots %}
+            <li class="splide__slide"><img src="{{ screenshots.url }}"class="w-100" alt="..."></li>
+{% endfor %}
+            {% endif %}
+
+</ul>
+    </div>
+    </section>
+</div>
+<div class="col-12 col-md-4 ms-md-5 mt-4 mt-md-0">
+  <div class="row bg-image h-100">
+    <div class="col-12 ">
+    <div class="image-box bg-image">
+  <img src="{{ product_cover.url }}" class="image-cropped-calc" >
+  {% if product.sale_discount > 0 %}
+  <div class="position-absolute top-0 end-0 text-light w-5" style="background-color: rgba(220, 20, 60)">
+  <p class="p-2 m-1 text-align-right sale-amount">-{{ product.sale_discount }}%</p></div>
+  {% endif %}
+</div>
+  </div>
+  <div class="stock_info align-self-end"><p class="text-end">{% if product.keys_in_stock|length > 5 %}In Stock{% elif product.keys_in_stock|length > 0 %}<span class="text-danger">Hurry! Only {{ product.keys_in_stock| length }} left in stock!</span>{% else %}Out Of Stock{% endif %}</p>
+    {% if product.sale_discount > 0 %}<p class="text-end"><span class="text-decoration-line-through text-danger display-6">{{ product.base_price }}</span></p><p class="text-end"><span class="display-6">{{ product.sale_price }}</span></p>{% else %}<p class="text-end"><span class="display-6">{{ product.base_price }}</span></p>{% endif %}
+  <div class="text-end">{% if product.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-primary float-end" id="cart-button" data-product-id="{{ product.id }}" data-product-platform="{{ product.platform }}">Add To Cart</button>{% endif %}</div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="row mt-4">
+  <div class="col-md-7">
+    <h2 class="my-5"><span>About This Game</span></h2>
+    
+    <p>{{ product.summary }}</p>
+  </div>
+  <div class="col-md-5 mt-4"><h3 class="mt-4 mb-5"><span>Game Details</span></h3>
+  <p class="w-100"><span>Genres:</span><span class="float-end">{% for genres in product_genres %}{% if forloop.last %}<a href="{% url 'games' %}?genres={{ genres.slug }}">{{ genres.name }}</a>{% else %}<a href="{% url 'games' %}?genres={{ genres.slug }}">{{ genres.name }}</a>, {% endif %}{% endfor %}</span></p>
+<p class="w-100"><span>Published By:</span><span class="float-end">{% for publishers in product_publisher %}<a href="{% url 'games' %}?company={{ publishers.company_id.slug }}">{{ publishers.company_id.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span></p>
+<p class=" w-100"><span>Developed By:</span><span class="float-end">{% for developers in product_developer %}<a href="{% url 'games' %}?company={{ developers.company_id.slug }}">{{ developers.company_id.name }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}</span></p>
+<p class=" w-100"><span>Release Date:</span><span class="float-end">{{ product.first_release }}</span></p>
+
+
+</div>
+</div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+document.addEventListener( 'DOMContentLoaded', function () {
+  var main = new Splide( '#main-carousel', {
+    type      : 'fade',
+    rewind    : true,
+    speed     : 3000,
+    pagination: false,
+    arrows    : false,
+  } );
+
+  var thumbnails = new Splide( '#thumbnail-carousel', {
+    perPage: 4,
+    gap         : 10,
+    rewind      : true,
+    pagination  : false,
+    isNavigation: true,
+    breakpoints : {
+      600: {
+        fixedWidth : 60,
+        fixedHeight: 44,
+      },
+    },
+  } );
+
+  main.sync( thumbnails );
+  main.mount();
+  thumbnails.mount();
+} );
+  </script>
+  {% endblock %}
