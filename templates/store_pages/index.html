@@ -1,0 +1,174 @@
+{% extends "store_pages/base_template.html" %}
+{% load check_wishlist %}
+{% block banner %}
+<div class="bg-image shadow-2-strong mb-5" ><img src="https://gamedb-bucket.s3.eu-central-1.amazonaws.com/GamesDirect.webp" class="w-100">
+</div>
+{% endblock %}
+{% block content %}
+
+<div class="on_sale mt-5">
+  <h2 ><span>On Sale</span></h2>
+    <div class="row my-5">
+    {% for sale_items in on_sale %}
+    <div class="col-6 col-md-3">
+      <div class="card my-3" >
+        {% for covers in sale_items.cover_set.all %}
+        <div class="game-art bg-image hover-overlay">
+          
+          <picture>
+            <source media="(max-width:768px)" srcset="{{ covers.cover_mobile_resized.url }}">
+            <img src="{{ covers.cover_large_resized.url }}" class="card-img-top"  alt="Cover of {{ sale_items.name }}"></picture>
+        {% if sale_items.sale_discount > 0 %}
+        <div class="position-absolute bottom-0 end-0 text-light w-5"
+        style="background-color: rgba(220, 20, 60)">
+        <p class="p-2 m-1 text-align-right sale-amount">-{{ sale_items.sale_discount }}%</p></div>
+        {% endif %}
+        <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">   {% if user.is_authenticated %}
+
+            {% check_wishlist user sale_items.game_id sale_items.platform as wishlist_evaluation %}
+            {% if wishlist_evaluation %}
+            <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3" id="{{ sale_items.id }}" data-game-id="{{ sale_items.game_id}}" data-platform="{{ sale_items.platform }}"></i>             
+            {% else %}
+            <i class="fa-regular fa-heart wishlist me-3" id="{{ sale_items.id }}" data-game-id="{{ sale_items.game_id}}" data-platform="{{ sale_items.platform }}"></i>              {% endif %}
+         
+            {% if sale_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart" id="cart-button" data-product-id="{{ sale_items.id }}" data-product-platform="{{ sale_items.platform }}">Add To Cart</button>{% endif %}
+          {% else %}
+          <i type="button" class="fa-regular fa-heart wishlist-login me-3" id="{{ sale_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+      </i>
+    
+                  <button type="button" class="btn btn-secondary add-to-cart" id="{{ sale_items.game_id }}">Add To Cart</button>
+    
+      
+          {% endif %}
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+        <div class="card-body">
+    <p><a href="{% url 'products' sale_items.slug %}?platform={{ sale_items.platform }}">{{ sale_items.name }}({% if sale_items.platform is 6 %}PC{% elif sale_items.platform is 130 %}Nintendo Switch{% elif sale_items.platform is 167 %}Playstation 5{% elif sale_items.platform is 169 %}Xbox Series X|S{% endif %})</a></p>
+    <div class="stock row"><p>{% if sale_items.keys_in_stock|length > 5 %}<span class="float-end">In Stock</span>{% elif sale_items.keys_in_stock|length > 0 %}<span class="text-danger float-end">Hurry! Only {{ sale_items.keys_in_stock| length }} left in stock!</span>{% else %}<span class="float-end">Out Of Stock</span>{% endif %}</p></div>
+ 
+    <div class="price-info">{% if sale_items.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ sale_items.base_price }}</span><span class="all-prices float-end">{{ sale_items.sale_price }}</span></p>{% else %}<span class="all-prices float-end">{{ sale_items.base_price }}</span></p>{% endif %}</div>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+  <div class="new_releases">
+    <h2 ><span>New Releases</span></h2>
+    <div class="row my-5">
+    {% for new_items in new_releases %}
+    <div class="col-6 col-md-3">
+      <div class="card my-3" >
+        {% for covers in new_items.cover_set.all %}
+        <div class="game-art bg-image hover-overlay">
+          <picture>
+            <source media="(max-width:768px)" srcset="{{ covers.cover_mobile_resized.url }}">
+            <img src="{{ covers.cover_large_resized.url }}" class="card-img-top"  alt="Cover of {{ new_releases.name }}"></picture>
+        {% if new_items.sale_discount > 0 %}
+        <div class="position-absolute bottom-0 end-0 text-light w-5"
+        style="background-color: rgba(220, 20, 60)">
+        <p class="p-2 m-1 text-align-right sale-amount">-{{ new_items.sale_discount }}%</p></div>
+        {% endif %}
+        <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">   {% if user.is_authenticated %}
+          {% check_wishlist user new_items.game_id new_items.platform as wishlist_evaluation %}
+          {% if wishlist_evaluation %}
+          <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3" id="{{ new_items.id }}" data-game-id="{{ new_items.game_id }}" data-platform="{{ new_items.platform }}"></i>             
+          {% else %}
+          <i class="fa-regular fa-heart wishlist me-3" id="{{ new_items.id }}" data-game-id="{{ new_items.game_id }}" data-platform="{{ new_items.platform }}"></i>              {% endif %}
+          {% if new_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart" id="cart-button" data-product-id="{{ new_items.id }}" data-product-platform="{{ new_items.platform }}">Add To Cart</button>{% endif %}
+          {% else %}
+          <i type="button" class="fa-regular fa-heart wishlist-login me-3" id="{{ new_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+      </i>
+    
+                  <button type="button" class="btn btn-secondary add-to-cart" id="{{ new_items.game_id }}">Add To Cart</button>
+    
+      
+          {% endif %}
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+        <div class="card-body">
+    <p><a href="{% url 'products' new_items.slug %}?platform={{ new_items.platform }}">{{ new_items.name }}({% if new_items.platform is 6 %}PC{% elif new_items.platform is 130 %}Nintendo Switch{% elif new_items.platform is 167 %}Playstation 5{% elif new_items.platform is 169 %}Xbox Series X|S{% endif %})</a></p>
+    <div class="stock row"><p>{% if new_items.keys_in_stock|length > 5 %}<span class="float-end">In Stock</span>{% elif new_items.keys_in_stock|length > 0 %}<span class="text-danger float-end">Hurry! Only {{ new_items.keys_in_stock| length }} left in stock!</span>{% else %}<span class="float-end">Out Of Stock</span>{% endif %}</p></div>
+
+    <div class="price-info">{% if new_items.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ new_items.base_price }}</span><span class="all-prices float-end">{{ new_items.sale_price }}</span></p>{% else %}<span class="all-prices float-end">{{ new_items.base_price }}</span></p>{% endif %}</div>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+  <div class="top_rated">
+    <h2 class="my-5"><span>Top Rated</span></h2>
+    <div class="row">
+    {% for top_items in top_rated %}
+    <div class="col-6 col-md-3">
+      <div class="card my-3">
+        {% for covers in top_items.cover_set.all %}
+        <div class="game-art bg-image hover-overlay">
+          <picture>
+            <source media="(max-width:768px)" srcset="{{ covers.cover_mobile_resized.url }}">
+            <img src="{{ covers.cover_large_resized.url }}" class="card-img-top"  alt="Cover of {{ top_rated.name }}"></picture>        {% if top_items.sale_discount > 0 %}
+        <div class="position-absolute bottom-0 end-0 text-light w-5"
+        style="background-color: rgba(220, 20, 60)">
+        <p class="p-2 m-1 text-align-right sale-amount">-{{ top_items.sale_discount }}%</p></div>
+        {% endif %}
+        <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">   {% if user.is_authenticated %}
+          {% check_wishlist user top_items.game_id top_items.platform as wishlist_evaluation %}
+          {% if wishlist_evaluation %}
+          <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3" id="{{ top_items.id }}" data-game-id="{{ new_items.game_id }}"  data-platform="{{ top_items.platform }}"></i>              
+          {% else %}
+          <i class="fa-regular fa-heart wishlist me-3" id="{{ top_items.id }}" data-game-id="{{ new_items.game_id }}"  data-platform="{{ top_items.platform }}"></i>              {% endif %}
+          {% if top_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart" id="cart-button" data-product-id="{{ top_items.id }}" data-product-platform="{{ top_items.platform }}">Add To Cart</button>{% endif %}
+          {% else %}
+          <i type="button" class="fa-regular fa-heart wishlist-login me-3" id="{{ top_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+      </i>
+    
+                  <button type="button" class="btn btn-secondary add-to-cart" id="{{ top_items.game_id }}">Add To Cart</button>
+    
+      
+          {% endif %}
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+        <div class="card-body">
+    <p><a href="{% url 'products' top_items.slug %}?platform={{ top_items.platform }}">{{ top_items.name }}({% if top_items.platform is 6 %}PC{% elif top_items.platform is 130 %}Nintendo Switch{% elif top_items.platform is 167 %}Playstation 5{% elif top_items.platform is 169 %}Xbox Series X|S{% endif %})</a></p>
+    <div class="stock row"><p>{% if top_items.keys_in_stock|length > 5 %}<span class="float-end">In Stock</span>{% elif top_items.keys_in_stock|length > 0 %}<span class="text-danger float-end">Hurry! Only {{ top_items.keys_in_stock| length }} left in stock!</span>{% else %}<span class="float-end">Out Of Stock</span>{% endif %}</p></div>
+    <div class="price-info">{% if top_items.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ top_items.base_price }}</span><span class="all-prices float-end">{{ top_items.sale_price }}</span></p>{% else %}<span class="all-prices float-end">{{ top_items.base_price }}</span></p>{% endif %}</div>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+  {% if not user.is_authenticated %}
+
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Please Sign In</h5>
+                  
+                </div>
+                <div class="modal-body">
+                  <p>Please sign in to add to your wishlist.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <a type="button" class="btn btn-primary" href="{% url 'account_login' %}">Sign In</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+    {% endif %}
+
+
+
+{% endblock %}
