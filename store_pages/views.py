@@ -179,3 +179,13 @@ def sale_generation():
     for each_game in random_games:
         each_game.sale_discount = random.randint(1, 50)
         each_game.save()
+
+def stock_assignment():
+    game_keys = Game.objects.filter().order_by("?")[:75]
+    for games in game_keys:
+        random_amount = random.randint(1,30)
+        for keys in range(random_amount):
+            order_length = 4
+            order_number_generator = ''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))+'-'+''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))+'-'+''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))+'-'+''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))
+            games.keys_in_stock.append(order_number_generator)
+            games.save()
