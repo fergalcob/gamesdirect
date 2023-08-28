@@ -297,3 +297,24 @@ def games(request):
         "referrer" : referrer
     }
     return render(request,"store_pages/platform.html", context = context)
+
+def products(request, pk):
+    platform_id=request.GET['platform']
+    product = Game.objects.get(Q(slug=pk) & Q(platform=platform_id))
+    product_videos = Videos.objects.filter(game_ids__game_id = product.game_id)
+    product_screenshots = Screenshots.objects.filter(game_ids__game_id = product.game_id)
+    product_cover = Cover.objects.get(Q(game_ids__game_id = product.game_id)& Q(game_ids__platform=platform_id))
+    product_genres = Genres.objects.filter(genre_id__in=product.genres)
+    product_publisher = Involved_companies.objects.filter(Q(game_ids__game_id = product.game_id) & Q(game_ids__platform=platform_id) & Q(publisher = True))
+    product_developer = Involved_companies.objects.filter(Q(game_ids__game_id = product.game_id) & Q(game_ids__platform=platform_id) & Q(developer = True))
+    print(product_developer)
+    context = {
+        'product':product,
+        'product_videos' :product_videos,
+        'product_screenshots':product_screenshots,
+        'product_genres' : product_genres,
+        'product_cover' : product_cover,
+        'product_publisher' : product_publisher,
+        'product_developer' : product_developer
+    }
+    return render(request,"store_pages/product_page.html", context=context)
