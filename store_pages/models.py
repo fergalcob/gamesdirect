@@ -70,3 +70,7 @@ class Genres(models.Model):
 	genre_id = models.IntegerField(primary_key=True)
 	slug = models.CharField(max_length=100)
 	name = models.CharField(max_length=100)
+	
+class Wishlist(models.Model):
+	wishlist_items = models.ManyToManyField(Game)
+	owner = models.ForeignKey(User,on_delete=models.CASCADE)
