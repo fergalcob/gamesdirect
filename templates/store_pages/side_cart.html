@@ -1,0 +1,34 @@
+{% if request.user.is_authenticated %}
+{% load get_cart %}
+{% get_cart request as my_cart %}
+{% endif %}
+{% block side_cart %}
+
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3 h-100" id="side-cart-dynamic">
+          {% if request.user.is_authenticated and my_cart %}
+          {% for items in my_cart %}
+          {% for individual_items in items.cart_items.current_cart %}
+          <li class="nav-item">
+            
+            <p><div class="row w-100"><div class="col-2"><img src="{{ individual_items.item_thumbnail }}"></div><div class="col-8 offset-2"><a class="nav-link active" aria-current="page" href="{% url 'products' individual_items.item_slug %}?platform={{ individual_items.item_platform }}">{{ individual_items.item_name }}({{ individual_items.item_console }})</a><p>Price: €{{ individual_items.item_price }}</p></div></div></p>
+            <p>QTY: <span class="border border-dark rounded-pill py-2 px-3 ms-3"><span type="button" id="decrement-quantity" class=" btn btn-link rounded-circle text-decoration-none pb-3"> - </span><span data-quantity="{{ individual_items.item_quantity}}" data-product-id="{{ individual_items.item_id }}"> {{ individual_items.item_quantity }} </span>
+                <span type="button" id="increment-quantity" class=" btn btn-link rounded-circle text-decoration-none pb-3"> + </span> <i type="button" id="remove-from-cart" class="fa-solid fa-trash-can" data-product-id="{{ individual_items.item_id }}"></i></span></p>
+          </li>
+          {% endfor %}
+          {% if items.cart_items.current_cart|length > 0 %}
+          <li class="nav-item mt-auto"><span class="h3">Total Price:{{ items.total_price }}</span> 
+            <button class="btn btn-light d-block w-100 mt-2" id="submitBtn">Checkout</button>
+          </li>
+          {% else %}
+          <li>There are no items in your cart.</li>
+          {% endif %}
+          {% endfor %}
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">There are no items in your cart.</a>
+          </li>
+          {% endif %}
+        </ul>
+
+
+{% endblock %}
