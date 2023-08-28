@@ -325,3 +325,11 @@ def add_to_wishlist(request):
     my_wishlist.wishlist_items.add(Game.objects.get(Q(game_id=request.POST['item_id'])& Q(platform=request.POST['platform_id']))) 
     print(my_wishlist.wishlist_items.all())
     return render(request,"store_pages/index.html")
+
+def remove_from_wishlist(request):
+    game_to_remove = Game.objects.get(Q(game_id=request.POST['item_id']) & Q(platform=request.POST['platform_id']))
+    my_wishlist = Wishlist.objects.get(owner=request.user)
+    my_wishlist.wishlist_items.remove(game_to_remove)
+    my_wishlist.save()
+
+    return render(request,"account/my_wishlist.html")

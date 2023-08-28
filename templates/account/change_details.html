@@ -1,0 +1,44 @@
+{% extends "store_pages/base_template.html" %}
+{% load i18n %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>{% trans "Change Password" %}</h1>
+
+            <form method="POST" action="{% url 'account_change_password' %}" class="password_change">
+                {% csrf_token %}
+                {{ password_change_form.as_p }}
+                <button type="submit" name="action">{% trans "Change Password" %}</button>
+                <a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+            </form>
+    </div>
+    <div class="col-md-6">    <h1>{% trans "Email Address" %}</h1>
+        {% if emailaddresses %}
+            {% if current_emailaddress %}
+                <p>
+                    {% trans 'The following email address is associated with your account:' %} <a href="mailto:{{ current_emailaddress.email }}">{{ current_emailaddress.email }}</a>
+                </p>
+            {% endif %}
+            {% if new_emailaddress %}
+                <p>
+                    {% trans 'Your email address is still pending verification:' %} <a href="mailto:{{ new_emailaddress.email }}">{{ new_emailaddress.email }}</a>
+                </p>
+                <form method="post" action="{% url 'account_email' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="email" value="{{ new_emailaddress.email }}">
+                    <button type="submit" name="action_send">{% trans 'Re-send Verification' %}</button>
+                </form>
+            {% endif %}
+        {% else %}
+            {% include "account/snippets/warn_no_email.html" %}
+        {% endif %}
+        <h4 class="mt-4">{% trans "Change Email Address" %}</h4>
+        <form method="post" action="{% url 'account_email' %}">
+            {% csrf_token %}
+            {{ email_form.as_p }}
+            <button name="action_add" type="submit">{% trans "Change Email" %}</button>
+        </form></div>
+    </div>
+</div>
+{% endblock %}

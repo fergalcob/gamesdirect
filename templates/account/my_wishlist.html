@@ -1,0 +1,38 @@
+{% extends "store_pages/base_template.html" %}
+
+{% block content %}
+<div id="wishlist_items">
+    <h2 class="mb-5"><span>Items On My Wishlist</span></h2>
+    <div class="row mt-3">
+      {% if my_wishlist.wishlist_items.all %}
+    {% for wishlist_items in my_wishlist.wishlist_items.all %}
+    <div class="col-6 col-md-3" id="wishlist_item_{{ wishlist_items.id }}">
+      <div class="card my-3">
+        {% for covers in wishlist_items.cover_set.all %}
+        <div class="game-art bg-image hover-overlay">
+        <img class="card-img-top  " src="{{ covers.url }}" alt="Card image cap">
+        {% if wishlist_items.sale_discount > 0 %}
+        <div class="position-absolute bottom-0 end-0 text-light w-5"
+        style="background-color: rgba(220, 20, 60)">
+        <p class="p-2 m-1 text-align-right sale-amount">-{{ wishlist_items.sale_discount }}%</p></div>
+        {% endif %}
+        <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">
+          <i class="fa-solid fa-heart-circle-xmark remove-wishlist wishlist-page wishlist_item_{{ wishlist_items.id }} me-3" id="{{ wishlist_items.id }}" data-game-id="{{ wishlist_items.game_id }}" data-platform="{{ wishlist_items.platform }}"></i>  <button type="button" class="btn btn-secondary add-to-cart" id="cart-button" data-product-id="{{ wishlist_items.id }}" data-product-platform="{{ sale_items.platform }}">Add To Cart</button>    
+      
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+        <div class="card-body">
+    <p><a href="{% url 'products' wishlist_items.slug %}?platform={{ wishlist_items.platform }}">{{ wishlist_items.name }}({% if wishlist_items.platform is 6 %}PC{% elif wishlist_items.platform is 130 %}Nintendo Switch{% elif wishlist_items.platform is 167 %}Playstation 5{% elif wishlist_items.platform is 169 %}Xbox Series X|S{% endif %})</a></p>
+    <div class="price-info">{% if wishlist_items.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ wishlist_items.base_price }}</span><span class="all-prices float-end">{{ wishlist_items.sale_price }}</span></p>{% else %}<span class="all-prices float-end">{{ wishlist_items.base_price }}</span></p>{% endif %}</div>
+
+  </div>
+    </div>
+    </div>
+    {% endfor %}
+{% else %}
+<p>You have no items on your Wishlist yet!</p>
+{% endif %}
+  </div>
+  {% endblock %}
