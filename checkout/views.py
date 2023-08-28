@@ -201,3 +201,10 @@ def stripe_webhook(request):
             })
 
     return HttpResponse(status=200)
+
+def SuccessView(request):
+    messages.add_message(request, messages.INFO, "Your payment was successful and your items will be delivered shortly.")
+    return redirect('index')
+def CancelledView(request):
+    messages.add_message(request, messages.INFO, "You have cancelled your payment.")
+    return redirect('index')
