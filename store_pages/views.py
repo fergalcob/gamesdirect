@@ -450,5 +450,17 @@ def subscribe_view(request):
                 logger.error(f'An exception occurred: {error.text}')
                 return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
-
     return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+def change_details(request):
+    if request.user.is_authenticated:
+        emailform = AddEmailForm()
+        passwordform = ChangePasswordForm()
+        context = {
+            'email_form' : emailform,
+            'password_change_form' : passwordform,
+            'emailaddresses': list(EmailAddress.objects.filter(user=request.user).order_by("email")),
+            'new_emailaddress': EmailAddress.objects.get_new(request.user),
+            'current_emailaddress': EmailAddress.objects.get_verified(request.user)
+        }
+        return render(request,"account/change_details.html", context = context)
