@@ -16,7 +16,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from store_pages.views import CustomPasswordChangeView, CustomEmailView 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
+
+from django.urls import include
+
+urlpatterns += [
+    path('store_pages/', include('store_pages.urls')),
+    path('accounts/password/change/', CustomPasswordChangeView.as_view(), name="account_change_password"),
+    path('accounts/email/', CustomEmailView.as_view(), name="account_email"),
+    path('accounts/', include('allauth.urls')),
+    path('', include('checkout.urls')), # new
+]
+
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='store_pages/', permanent=True)),
+]
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
