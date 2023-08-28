@@ -48,4 +48,25 @@ class Cover(models.Model):
 	cover_large_resized = ResizedImageField(size=[400, 500],quality=90, upload_to='media/', blank=True, null=True)
 	cover_thumb_resized = ResizedImageField(size=[150, 150],quality=90, upload_to='media/', blank=True, null=True)
 	cover_mobile_resized =  ResizedImageField(size=[150, 200],quality=90, upload_to='media/', blank=True, null=True)
+
+class Company(models.Model):
+	company_id = models.IntegerField(primary_key=True)
+	name = models.CharField(max_length=100)
+	slug = models.CharField(max_length=100)
 	
+class Involved_companies(models.Model):
+	involved_companies_id = models.IntegerField(primary_key=True)
+	publisher = models.BooleanField()
+	developer = models.BooleanField()
+	game_ids = models.ManyToManyField(Game)
+	company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
+
+class Console(models.Model):
+	console_id = models.IntegerField(primary_key=True)
+	slug = models.CharField(max_length=100)
+	name = models.CharField(max_length=100)
+
+class Genres(models.Model):
+	genre_id = models.IntegerField(primary_key=True)
+	slug = models.CharField(max_length=100)
+	name = models.CharField(max_length=100)
