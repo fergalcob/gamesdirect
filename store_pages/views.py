@@ -333,3 +333,21 @@ def remove_from_wishlist(request):
     my_wishlist.save()
 
     return render(request,"account/my_wishlist.html")
+
+class CustomPasswordChangeView(PasswordChangeView):
+    template_name = "account/change_details.html"
+    success_url = reverse_lazy('change_details')
+
+    def form_invalid(self, form):
+        password_change_form = form
+        email_form = AddEmailForm()
+        return render(self.request, self.template_name, {'password_change_form': password_change_form, 'email_form': email_form,"emailaddresses": list(EmailAddress.objects.filter(user=self.request.user).order_by("email")), "new_emailaddress": EmailAddress.objects.get_new(self.request.user),"current_emailaddress": EmailAddress.objects.get_verified(self.request.user)})
+    
+class CustomEmailView(EmailView):
+    template_name = 'account/change_details.html'
+    success_url = reverse_lazy('change_details')
+
+    def form_invalid(self, form):
+        email_form = form
+        password_change_form = ChangePasswordForm()
+        return render(self.request, self.template_name, {'password_change_form': password_change_form, 'email_form': email_form, "emailaddresses": list(EmailAddress.objects.filter(user=self.request.user).order_by("email")), "new_emailaddress": EmailAddress.objects.get_new(self.request.user),"current_emailaddress": EmailAddress.objects.get_verified(self.request.user)})
