@@ -419,3 +419,9 @@ def update_cart(request):
         get_user_cart.save()
     
     return JsonResponse({'current_total_json':list("current_total"), 'current_cart':list("product_list")})
+
+def calculate_total(cart_status):
+    price_calculation = 0
+    for products in cart_status:
+        price_calculation += float(products['item_price']) * float  (products['item_quantity'])
+    return price_calculation
