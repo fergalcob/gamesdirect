@@ -48,7 +48,6 @@ def game_addition(data):
             if platforms in [6,130,167,169]:
                 new_game,created = Game.objects.get_or_create(game_id = games['game']['id'],platform=platforms)
                 if created is True:
-                    print('hello')
                     new_game.game_id = games['game']['id']
                     new_game.aggregated_rating_count = games['game']['aggregated_rating_count']
                     new_game.platform = platforms
@@ -67,7 +66,6 @@ def game_addition(data):
                         new_game_cover.cover_id = games['game']['cover']['id']
                         new_game_cover.save()
                         new_game_cover.game_ids.add(new_game)
-                        print('https:' + new_game_cover.url_thumbnail)
                         urllib.request.urlretrieve(
                                 new_game_cover.url_thumbnail,
                                 str(new_game_cover.cover_id) + "_thumb.png")
@@ -123,7 +121,6 @@ def game_addition(data):
                                 new_game_screenshots.url = screenshots['url']
                                 new_game_screenshots.save()
                                 new_game_screenshots.game_ids.add(new_game)
-                                print(new_game_screenshots.url)
                                 urllib.request.urlretrieve(
                                         new_game_screenshots.url,
                                         str(new_game_screenshots.screenshots_id) + ".png")
@@ -282,7 +279,6 @@ def games(request):
         chosen_selector = 'search'
         referrer = None
         search_query = request.POST['search_query']
-        print(search_query)
         game_list = Game.objects.filter(name__icontains=search_query)
 
     page_number = request.GET.get("page")
@@ -307,7 +303,6 @@ def products(request, pk):
     product_genres = Genres.objects.filter(genre_id__in=product.genres)
     product_publisher = Involved_companies.objects.filter(Q(game_ids__game_id = product.game_id) & Q(game_ids__platform=platform_id) & Q(publisher = True))
     product_developer = Involved_companies.objects.filter(Q(game_ids__game_id = product.game_id) & Q(game_ids__platform=platform_id) & Q(developer = True))
-    print(product_developer)
     context = {
         'product':product,
         'product_videos' :product_videos,
@@ -323,7 +318,6 @@ def add_to_wishlist(request):
     my_wishlist,created = Wishlist.objects.get_or_create(owner=request.user)
     my_wishlist.save()
     my_wishlist.wishlist_items.add(Game.objects.get(Q(game_id=request.POST['item_id'])& Q(platform=request.POST['platform_id']))) 
-    print(my_wishlist.wishlist_items.all())
     return render(request,"store_pages/index.html")
 
 def remove_from_wishlist(request):
@@ -369,13 +363,11 @@ def add_to_cart(request):
             'item_platform' : add_product.platform,
             'item_console' : console.name
         }
-        print(cart_items)
         test_cart.cart_items['current_cart'].append(cart_items)
     else:
         cart_item_test = next((item for item in test_cart.cart_items['current_cart'].copy() if item['item_id'] == add_product.id), None)
         if cart_item_test is not None:
             cart_item_test['item_quantity'] = cart_item_test['item_quantity'] + 1
-            print(cart_item_test)
         else:
             cart_items = {
             'item_id' : add_product.id,
@@ -405,7 +397,6 @@ def remove_from_cart(request):
 
 def update_cart(request):
     new_quantity = request.POST['item_quantity']
-    print(new_quantity)
     if int(new_quantity) == 0:
         remove_from_cart(request)
     else:
@@ -429,7 +420,6 @@ def calculate_total(cart_status):
 def subscribe_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        print(form)
         if form.is_valid():
             try:
                 form_email = form.cleaned_data['email']
