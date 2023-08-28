@@ -425,3 +425,30 @@ def calculate_total(cart_status):
     for products in cart_status:
         price_calculation += float(products['item_price']) * float  (products['item_quantity'])
     return price_calculation
+
+def subscribe_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        print(form)
+        if form.is_valid():
+            try:
+                form_email = form.cleaned_data['email']
+                member_info = {
+                    'email_address': form_email,
+                    'status': 'pending',
+                }
+                response = mailchimp.lists.add_list_member(
+                    settings.MAILCHIMP_AUDIENCE_ID,
+                    member_info,
+                )
+                logger.info(f'API call successful: {response}')
+                messages.add_message(request, messages.INFO, "Your email address has been submitted. Please verify via the link sent to " + form_email)
+                return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+
+            except ApiClientError as error:
+                logger.error(f'An exception occurred: {error.text}')
+                return HttpResponseRedirect(request.META["HTTP_REFERER"])
+
+
+    return HttpResponseRedirect(request.META["HTTP_REFERER"])
