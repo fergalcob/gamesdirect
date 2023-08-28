@@ -318,3 +318,10 @@ def products(request, pk):
         'product_developer' : product_developer
     }
     return render(request,"store_pages/product_page.html", context=context)
+
+def add_to_wishlist(request):
+    my_wishlist,created = Wishlist.objects.get_or_create(owner=request.user)
+    my_wishlist.save()
+    my_wishlist.wishlist_items.add(Game.objects.get(Q(game_id=request.POST['item_id'])& Q(platform=request.POST['platform_id']))) 
+    print(my_wishlist.wishlist_items.all())
+    return render(request,"store_pages/index.html")
