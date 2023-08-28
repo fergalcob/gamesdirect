@@ -1,0 +1,109 @@
+{% extends "store_pages/base_template.html" %}
+{% load check_wishlist %}
+
+{% block content %}
+<div class="row">
+  <div class="col-3 ">
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Sort By:
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{% url 'games' %}?{{ referrer }}={{ chosen_selector.slug }}{% if 'filter' in request.GET %}&filter={{ request.GET.filter }}{% endif %}&sort=first_release&dir=asc">Release Date Ascending</a>
+      <a class="dropdown-item" href="{% url 'games' %}?{{ referrer }}={{ chosen_selector.slug }}{% if 'filter' in request.GET %}&filter={{ request.GET.filter }}{% endif %}&sort=first_release&dir=desc">Release Date Descending</a>
+      <a class="dropdown-item" href="{% url 'games' %}?{{ referrer }}={{ chosen_selector.slug }}{% if 'filter' in request.GET %}&filter={{ request.GET.filter }}{% endif %}&sort=name&dir=asc">Name A-Z</a>      
+      <a class="dropdown-item" href="{% url 'games' %}?{{ referrer }}={{ chosen_selector.slug }}{% if 'filter' in request.GET %}&filter={{ request.GET.filter }}{% endif %}&sort=name&dir=desc">Name Z-A</a>
+      <a class="dropdown-item" href="{% url 'games' %}?{{ referrer }}={{ chosen_selector.slug }}{% if 'filter' in request.GET %}&filter={{ request.GET.filter }}{% endif %}&sort=aggregated_rating&dir=desc">Average Critic Score Descending</a>
+      <a class="dropdown-item" href="{% url 'games' %}?{{ referrer }}={{ chosen_selector.slug }}{% if 'filter' in request.GET %}&filter={{ request.GET.filter }}{% endif %}&sort=aggregated_rating&dir=asc">Average Critic Score Ascending</a>
+    </div>
+  </div>
+</div>
+<div class="col-3 offset-2">
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Filter By:
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+{% for genre in genres %}
+    <a class="dropdown-item" href="{% url 'games' %}?{% if 'genres' in request.GET %}{{ referrer }}={{ genre.slug }}{% else %}{{ referrer }}={{ chosen_selector.slug }}&filter={{ genre.slug }}{% endif %}{% if 'sort' in request.GET %}&sort={{ request.GET.sort }}&dir={{ request.GET.dir }}{% endif %}">{{ genre.name }}</a>
+{% endfor %}
+</div>
+  </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+{% for games in page_obj %}
+<div class="col-6 col-md-3">
+  <div class="card my-3" >
+    {% for covers in games.cover_set.all %}
+    <div class="game-art bg-image hover-overlay">
+      <picture>
+        <source media="(max-width:768px)" srcset="{{ covers.cover_mobile_resized.url }}">
+        <img src="{{ covers.cover_large_resized.url }}" class="card-img-top"  alt="Cover of {{ games.name }}"></picture>    {% if games.sale_discount > 0 %}
+    <div class="position-absolute bottom-0 end-0 text-light w-5"
+    style="background-color: rgba(220, 20, 60)">
+    <p class="p-2 m-1 text-align-right sale-amount">-{{ games.sale_discount }}%</p></div>
+    {% endif %}
+    <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">   {% if user.is_authenticated %}
+      {% check_wishlist user games.game_id games.platform as wishlist_evaluation %}
+      {% if wishlist_evaluation %}
+      <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3" id="{{ games.id }}" data-game-id="{{ games.game_id }}"  data-platform="{{ games.platform }}"></i>              
+      {% else %}
+      <i class="fa-regular fa-heart wishlist me-3" id="{{ games.id }}" data-game-id="{{ games.game_id }}"  data-platform="{{ games.platform }}"></i>              {% endif %}
+      {% if games.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart" id="cart-button" data-product-id="{{ games.id }}" data-product-platform="{{ games.platform }}">Add To Cart</button>{% endif %}
+      {% else %}
+      <i type="button" class="fa-regular fa-heart wishlist-login me-3" id="{{ games.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+  </i>
+
+              <button type="button" class="btn btn-secondary add-to-cart" id="{{ games.game_id }}">Add To Cart</button>
+
+  
+      {% endif %}
+      </div>
+    </div>
+  </div>
+    {% endfor %}
+    <div class="card-body">
+<p><a href="{% url 'products' games.slug %}?platform={{ games.platform }}">{{ games.name }}</a></p>
+<div class="stock row"><p>{% if games.keys_in_stock|length > 5 %}<span class="float-end">In Stock</span>{% elif games.keys_in_stock|length > 0 %}<span class="text-danger float-end">Hurry! Only {{ games.keys_in_stock| length }} left in stock!</span>{% else %}<span class="float-end">Out Of Stock</span>{% endif %}</p></div>
+<div class="price-info">{% if games.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ games.base_price }}</span><span class="all-prices float-end">{{ games.sale_price }}</span></p>{% else %}<span class="all-prices float-end">{{ games.base_price }}</span></p>{% endif %}</div>
+</div>
+</div>
+</div>
+
+{% endfor %}
+</div>
+<div class="pagination">
+  <span>
+    {% if page_obj.has_previous %}
+      <a href="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span>
+      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+    </span>
+    {% if page_obj.has_next %}
+      <a href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+  </span>
+</div>
+
+</div>
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Please Sign In</h5>
+        
+      </div>
+      <div class="modal-body">
+        <p>Please sign in to add to your wishlist.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <a type="button" class="btn btn-primary" href="{% url 'account_login' %}">Sign In</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
