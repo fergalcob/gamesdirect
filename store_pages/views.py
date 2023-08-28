@@ -189,3 +189,111 @@ def stock_assignment():
             order_number_generator = ''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))+'-'+''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))+'-'+''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))+'-'+''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))
             games.keys_in_stock.append(order_number_generator)
             games.save()
+
+def games(request):
+    genres = Genres.objects.all()
+    if 'platform'in request.GET:
+        referrer = 'platform'
+        chosen_selector = Console.objects.get(slug=request.GET['platform'])
+        if 'filter' in request.GET:
+            chosen_filter = Genres.objects.get(slug=request.GET['filter'])
+            if 'sort' in request.GET:
+                chosen_sort = request.GET['sort']
+                if 'dir' in request.GET:
+                    chosen_dir = request.GET['dir']
+                    if chosen_dir == 'desc':
+                        chosen_sort = f'-{chosen_sort}'
+                    game_list = Game.objects.filter(platform=chosen_selector.console_id).filter(genres__contains=[chosen_filter.genre_id]).order_by(chosen_sort)
+        
+            else:
+                game_list = Game.objects.filter(platform=chosen_selector.console_id).filter(genres__contains=[chosen_filter.genre_id])
+        
+        else:
+            if 'sort' in request.GET:
+                chosen_sort = request.GET['sort']
+                if 'dir' in request.GET:
+                    chosen_dir = request.GET['dir']
+                    if chosen_dir == 'desc':
+                        chosen_sort = f'-{chosen_sort}'
+                    game_list = Game.objects.filter(platform=chosen_selector.console_id).order_by(chosen_sort)
+
+            else:
+                game_list = Game.objects.filter(platform=chosen_selector.console_id).prefetch_related('cover_set')
+    elif 'genres' in request.GET:
+        referrer = 'genres'
+        chosen_selector= Genres.objects.get(slug=request.GET['genres'])
+        if 'filter' in request.GET:
+            chosen_filter = Genres.objects.get(slug=request.GET['filter'])
+            if 'sort' in request.GET:
+                chosen_sort = request.GET['sort']
+                if 'dir' in request.GET:
+                    chosen_dir = request.GET['dir']
+                    if chosen_dir == 'desc':
+                        chosen_sort = f'-{chosen_sort}'
+                    game_list = Game.objects.filter(genres__contains=[chosen_selector.genre_id]).filter(genres__contains=[chosen_filter.genre_id]).order_by(chosen_sort)
+        
+            else:
+                game_list = Game.objects.filter(genres__contains=[chosen_selector.genre_id]).filter(genres__contains=[chosen_filter.genre_id])
+        
+        else:
+            if 'sort' in request.GET:
+                chosen_sort = request.GET['sort']
+                if 'dir' in request.GET:
+                    chosen_dir = request.GET['dir']
+                    if chosen_dir == 'desc':
+                        chosen_sort = f'-{chosen_sort}'
+                    game_list = Game.objects.filter(genres__contains=[chosen_selector.genre_id]).order_by(chosen_sort)
+
+            else:
+                game_list = Game.objects.filter(genres__contains=[chosen_selector.genre_id])
+    elif 'company' in request.GET:
+        referrer = 'company'
+        chosen_selector = Company.objects.get(slug=request.GET['company'])
+        games_from_company = Involved_companies.objects.filter(company_id=chosen_selector)
+        company_games_list = []
+        for each_game in games_from_company:
+            for individual_games in each_game.game_ids.all():
+                company_games_list.append(individual_games.game_id)
+        if 'filter' in request.GET:
+            chosen_filter = Genres.objects.get(slug=request.GET['filter'])
+            if 'sort' in request.GET:
+                chosen_sort = request.GET['sort']
+                if 'dir' in request.GET:
+                    chosen_dir = request.GET['dir']
+                    if chosen_dir == 'desc':
+                        chosen_sort = f'-{chosen_sort}'
+                    game_list = Game.objects.filter(game_id__in=company_games_list).filter(genres__contains=[chosen_filter.genre_id]).order_by(chosen_sort)
+        
+            else:
+                game_list = Game.objects.filter(game_id__in=company_games_list).filter(genres__contains=[chosen_filter.genre_id])
+        
+        else:
+            if 'sort' in request.GET:
+                chosen_sort = request.GET['sort']
+                if 'dir' in request.GET:
+                    chosen_dir = request.GET['dir']
+                    if chosen_dir == 'desc':
+                        chosen_sort = f'-{chosen_sort}'
+                    game_list = Game.objects.filter(game_id__in=company_games_list).order_by(chosen_sort)
+
+            else:
+                game_list = Game.objects.filter(game_id__in=company_games_list)
+    elif request.method == 'POST':
+        chosen_selector = 'search'
+        referrer = None
+        search_query = request.POST['search_query']
+        print(search_query)
+        game_list = Game.objects.filter(name__icontains=search_query)
+
+    page_number = request.GET.get("page")
+    if page_number == None or page_number == "":
+        page_number = 1
+    paginator = Paginator(game_list, 16)
+    page_obj = paginator.page(page_number)
+    context = {
+        "page_obj" : page_obj,
+        "chosen_selector" : chosen_selector,
+        "genres" : genres,
+        "referrer" : referrer
+    }
+    return render(request,"store_pages/platform.html", context = context)
