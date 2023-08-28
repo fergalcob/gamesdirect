@@ -56,3 +56,39 @@ def create_checkout_session(request):
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
             return JsonResponse({'error': str(e)})
+
+
+@csrf_exempt
+def stripe_webhook(request):
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    endpoint_secret = settings.STRIPE_ENDPOINT_SECRET
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        status_update = Orders.objects.get(order_number = event['data']['object']['client_reference_id'])
+        empty_cart = CurrentCart.objects.get(owner = status_update.owner_id)
+        empty_cart.delete()
+        for items in status_update.order_items['current_cart']:
+            items['activation_keys'] = []
+            order_item = Game.objects.get(id = items['item_id'])
+            for number_of_keys in range(0,items['item_quantity']):
+                key = order_item.keys_in_stock[number_of_keys]
+                items['activation_keys'].append(key)
+                order_item.keys_in_stock.pop(number_of_keys)
+                order_item.save()
+        status_update.order_status = "Completed"
+        status_update.save()
