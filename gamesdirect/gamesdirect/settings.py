@@ -103,7 +103,7 @@ DATABASES = {
     'ENGINE': 'django.db.backends.postgresql_psycopg2',
     'NAME': 'postgres',
     'USER': 'postgres',
-    'PASSWORD': os.getenv('PASSWORD')
+    'PASSWORD': os.getenv('PASSWORD'),
     'HOST': 'gamesdirect.cm7qqvcbuvwb.eu-central-1.rds.amazonaws.com',
     'PORT': '5432',
   }
