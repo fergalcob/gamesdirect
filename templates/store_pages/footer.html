@@ -1,0 +1,31 @@
+{% load sign_up %}
+{% sign_up as sign_up_form %}
+
+{% block footer %}
+    <footer class="footer text-center text-white" style="background-color: #202020">
+        <div class="container">
+          <section class="mt-5 mb-4">
+            <div class="row text-center d-flex justify-content-center pt-5 footer-row">
+              <div class="col-10 col-md-2 border p-4">
+                <h6>Subscribe To Our Newsletter</h6>
+                <p>Sign up to receive the latest news on releases and offers!</p>
+                <form method="post" action="{% url 'subscribe' %}">
+                  {% csrf_token %}
+                  {{ sign_up_form.as_p }}
+                  <button type="submit" class="btn btn-primary">Subscribe</button>
+              </form>
+              </div>
+              <div class="col-12 col-md-6 my-5 my-md-auto"><div class="row"><div class="col-3"><a href="https://facebook.com" rel="noopener" target="_blank"><i class="fa-brands fa-square-facebook social"></i></a></div><div class="col-3"><a href="https://youtube.com" rel="noopener" target="_blank"><i class="fa-brands fa-youtube social"></i></a></div><div class="col-3"><a href="https://instagram.com" rel="noopener" target="_blank"><i class="fa-brands fa-square-instagram social"></i></a></div><div class="col-3"><a href="https://twitch.tv" rel="noopener" target="_blank"><i class="fa-brands fa-twitch social"></i></a></div></div></div>
+              <div class="col-12 col-md-2"><h5>Contact Us</h5><h6>Email:</h6> <p>support@gamesdirect.shop</p><h6>Phone:</h6><p>(087)55555555</p></div>
+            </div>
+          </section>
+    </div>  
+    <div class="text-center text-light p-3" style="background-color: #121212;">
+      © 2023 Copyright: GamesDirect.shop
+    </div>
+    <div class="text-center text-light p-3" style="background-color: #121212;">
+      This storefront is for educational purposes. No orders will be completed.
+    </div>
+  </footer>
+    
+{% endblock %}
