@@ -351,3 +351,45 @@ class CustomEmailView(EmailView):
         email_form = form
         password_change_form = ChangePasswordForm()
         return render(self.request, self.template_name, {'password_change_form': password_change_form, 'email_form': email_form, "emailaddresses": list(EmailAddress.objects.filter(user=self.request.user).order_by("email")), "new_emailaddress": EmailAddress.objects.get_new(self.request.user),"current_emailaddress": EmailAddress.objects.get_verified(self.request.user)})
+
+def add_to_cart(request):
+    test_cart, created = CurrentCart.objects.get_or_create(owner=request.user)
+    add_product = Game.objects.get(id=request.POST['item_id'])
+    cover = Cover.objects.get(game_ids=add_product)
+    console = Console.objects.get(console_id = add_product.platform)
+    if created is True:
+        test_cart.cart_items={'current_cart':[]}
+        cart_items = {
+            'item_id' : add_product.id,
+            'item_quantity': int(request.POST['quantity']),
+            'item_price' : str(add_product.sale_price.amount),
+            'item_name' : add_product.name,
+            'item_thumbnail' : cover.cover_thumb_resized.url,
+            'item_slug' : add_product.slug,
+            'item_platform' : add_product.platform,
+            'item_console' : console.name
+        }
+        print(cart_items)
+        test_cart.cart_items['current_cart'].append(cart_items)
+    else:
+        cart_item_test = next((item for item in test_cart.cart_items['current_cart'].copy() if item['item_id'] == add_product.id), None)
+        if cart_item_test is not None:
+            cart_item_test['item_quantity'] = cart_item_test['item_quantity'] + 1
+            print(cart_item_test)
+        else:
+            cart_items = {
+            'item_id' : add_product.id,
+            'item_quantity': int(request.POST['quantity']),
+            'item_price' : str(add_product.sale_price.amount),
+            'item_name' : add_product.name,
+            'item_thumbnail' : cover.url_thumbnail,
+            'item_slug' : add_product.slug,
+            'item_platform' : add_product.platform,
+            'item_console' : console.name
+        }
+            test_cart.cart_items['current_cart'].append(cart_items)
+
+    test_cart.total_price = calculate_total(test_cart.cart_items['current_cart'])
+    test_cart.save()
+
+    return JsonResponse({'current_total_json':list("current_total"), 'current_cart':list("product_list")})
