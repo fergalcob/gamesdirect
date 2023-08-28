@@ -121,3 +121,83 @@ def stripe_webhook(request):
                 'detail': 'Something went wrong',
                 'error': error.text,
             })
+        
+    elif event['type'] == 'checkout.session.async_payment_succeeded':
+        status_update = Orders.objects.get(order_number = event['data']['object']['client_reference_id'])
+        empty_cart = CurrentCart.objects.get(owner = status_update.owner_id)
+        empty_cart.delete()
+        for items in status_update.order_items['current_cart']:
+            items['activation_keys'] = []
+            order_item = Game.objects.get(id = items['item_id'])
+            for number_of_keys in range(0,items['item_quantity']):
+                key = order_item.keys_in_stock[number_of_keys]
+                items['activation_keys'].append(key)
+                order_item.keys_in_stock.pop(number_of_keys)
+                order_item.save()
+        status_update.order_status = "Completed"
+        status_update.save()
+
+        message = {
+        'from_email': 'support@gamesdirect.shop',
+        'subject': 'Your Order: ' + status_update.order_number,
+        'html': '<p>Hey there,</p> '
+                '<p>We wish to let you know that your order(' + status_update.order_number + ') has been completed. You can find your activation keys at the following URL:</p>'
+                '<p>All the best,</p>'
+                '<p>The GamesDirect Team</p>'
+                '<a href="https://www.gamesdirect.shop">GamesDirect</a>', 
+        'to': [
+            {
+                'email': status_update.owner_id.email,
+                'type': 'to'
+            },
+        ]
+        }
+        try:
+            response = mailchimp.messages.send({
+                'message': message,
+            })
+            return JsonResponse({
+                'detail': 'Email has been sent',
+                'response': response,
+            })
+        except ApiClientError as error:
+            return JsonResponse({
+                'detail': 'Something went wrong',
+                'error': error.text,
+            })
+    elif event['type'] == ' checkout.session.async_payment_failed':
+        status_update = Orders.objects.get(order_number = event['data']['object']['client_reference_id'])
+        status_update.order_status = "Payment Failed"
+        status_update.save()
+
+        message = {
+        'from_email': 'support@gamesdirect.shop',
+        'subject': 'Your Order: ' + status_update.order_number,
+        'html': '<p>Hey there,</p> '
+                '<p>We wish to let you know that the payment for your order(' + status_update.order_number + ') has failed. Your payment method has not been charged and your order has not been completed</p>'
+                '<p>You can try again with a different payment method as your cart has been retained.'
+                '<p>All the best,</p>'
+                '<p>The GamesDirect Team</p>'
+                '<a href="https://www.gamesdirect.shop">GamesDirect</a>', 
+        'to': [
+            {
+                'email': status_update.owner_id.email,
+                'type': 'to'
+            },
+        ]
+        }
+        try:
+            response = mailchimp.messages.send({
+                'message': message,
+            })
+            return JsonResponse({
+                'detail': 'Email has been sent',
+                'response': response,
+            })
+        except ApiClientError as error:
+            return JsonResponse({
+                'detail': 'Something went wrong',
+                'error': error.text,
+            })
+
+    return HttpResponse(status=200)
