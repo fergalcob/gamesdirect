@@ -74,3 +74,8 @@ class Genres(models.Model):
 class Wishlist(models.Model):
 	wishlist_items = models.ManyToManyField(Game)
 	owner = models.ForeignKey(User,on_delete=models.CASCADE)
+	
+class CurrentCart(models.Model):
+	owner = models.ForeignKey(User,on_delete=models.CASCADE)
+	total_price = MoneyField(decimal_places=2, max_digits=6,default=0, default_currency="EUR")
+	cart_items = models.JSONField(default=dict)
