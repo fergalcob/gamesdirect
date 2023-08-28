@@ -92,3 +92,32 @@ def stripe_webhook(request):
                 order_item.save()
         status_update.order_status = "Completed"
         status_update.save()
+
+        message = {
+        'from_email': 'support@gamesdirect.shop',
+        'subject': 'Your Order: ' + status_update.order_number,
+        'html': '<p>Hey there,</p> '
+                '<p>We wish to let you know that your order(' + status_update.order_number + ') has been completed. You can find your activation keys at the following URL:</p>'
+                '<p>All the best,</p>'
+                '<p>The GamesDirect Team</p>'
+                '<a href="https://www.gamesdirect.shop">GamesDirect</a>', 
+        'to': [
+            {
+                'email': status_update.owner_id.email,
+                'type': 'to'
+            },
+        ]
+        }
+        try:
+            response = mailchimp.messages.send({
+                'message': message,
+            })
+            return JsonResponse({
+                'detail': 'Email has been sent',
+                'response': response,
+            })
+        except ApiClientError as error:
+            return JsonResponse({
+                'detail': 'Something went wrong',
+                'error': error.text,
+            })
