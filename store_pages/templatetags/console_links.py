@@ -12,3 +12,8 @@ register = template.Library()
 def get_consoles():
     all_consoles = Console.objects.all()
     return all_consoles
+
+@register.simple_tag
+def get_cart(request):
+    my_cart = CurrentCart.objects.filter(owner=request.user)
+    return my_cart
