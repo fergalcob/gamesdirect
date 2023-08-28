@@ -173,3 +173,9 @@ def genre_addition(data):
             new_genre.slug = genres['slug']
             new_genre.name = genres['name']
             new_genre.save()
+
+def sale_generation():
+    random_games = Game.objects.filter().order_by("?")[:40]
+    for each_game in random_games:
+        each_game.sale_discount = random.randint(1, 50)
+        each_game.save()
