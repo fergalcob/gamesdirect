@@ -47,8 +47,8 @@
   <div class="row bg-image h-100">
     <div class="col-12 ">
     <div class="image-box bg-image">
-  <img src="{{ product_cover.url }}" class="image-cropped-calc" >
-  {% if product.sale_discount > 0 %}
+      <picture><source media="(max-width:768px)" srcset="{{ cover.cover_mobile_resized.url }}">
+        <img src="{{ cover.screen_large_resized.url }}" class="card-img-top"  alt="Cover of {{ product.name }}"></picture>  {% if product.sale_discount > 0 %}
   <div class="position-absolute top-0 end-0 text-light w-5" style="background-color: rgba(220, 20, 60)">
   <p class="p-2 m-1 text-align-right sale-amount">-{{ product.sale_discount }}%</p></div>
   {% endif %}
