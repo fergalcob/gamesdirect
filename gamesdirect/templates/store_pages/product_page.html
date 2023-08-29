@@ -12,12 +12,13 @@
     <ul class="splide__list">
         {% if product_videos %}
         {% for videos in product_videos %}
-        <li class="splide__slide"><iframe src="https://www.youtube.com/embed/{{ videos.video_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="w-100 h-100"></iframe></li>
+        <li class="splide__slide"><iframe src="" data-src="https://www.youtube.com/embed/{{ videos.video_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen class="w-100 h-100"></iframe></li>
         {% endfor %}
         {% endif %}
         {% if product_screenshots %}
         {% for screenshots in product_screenshots %}
-        <li class="splide__slide"><img src="{{ screenshots.url }}" class="w-100" alt="..."></li>
+        <li class="splide__slide">        <source media="(max-width:768px)" srcset="{{ screenshots.screen_mobile_resized.url }}">
+          <img src="{{ screenshots.screen_large_resized.url }}" class="card-img-top"  alt="Cover of {{ product.name }}"></picture> </li>
 {% endfor %}
         {% endif %}
 </ul>
@@ -28,7 +29,8 @@
 		<ul class="splide__list">
             {% if product_videos %}
             {% for videos in product_videos %}
-            <li class="splide__slide"><img src="https://img.youtube.com/vi/{{ videos.video_id }}/mqdefault.jpg" class="w-100" alt="..."></li>
+            <li class="splide__slide"><source media="(max-width:768px)" srcset="{{ screenshots.screen_mobile_resized.url }}">
+              <img src="{{ screenshots.screen_large_resized.url }}" class="card-img-top"  alt="Cover of {{ product.name }}"></picture></li>
             {% endfor %}
             {% endif %}
             {% if product_screenshots %}
@@ -106,4 +108,13 @@ document.addEventListener( 'DOMContentLoaded', function () {
   thumbnails.mount();
 } );
   </script>
+    <script>
+      function init() {
+       var vidDefer = document.getElementsByTagName('iframe');
+       for (var i=0; i<vidDefer.length; i++) {
+       if(vidDefer[i].getAttribute('data-src')) {
+       vidDefer[i].setAttribute('src',vidDefer[i].getAttribute('data-src'));
+       } } }
+       window.onload = init;
+     </script>
   {% endblock %}

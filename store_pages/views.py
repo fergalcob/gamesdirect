@@ -138,7 +138,6 @@ def game_addition(data):
                                 new_game_screenshots.url = screenshots['url']
                                 new_game_screenshots.save()
                                 new_game_screenshots.game_ids.add(new_game)
-                                print(new_game_screenshots.url)
                                 urllib.request.urlretrieve(
                                         new_game_screenshots.url,
                                         str(new_game_screenshots.screenshots_id) + ".png")
@@ -154,10 +153,10 @@ def game_addition(data):
                                     upload_file_stream.getvalue(), "screen_large" + str(new_game_screenshots.screenshots_id) + ".webp"
                                 )
                                 new_game_screenshots.screen_mobile_resized = ContentFile(
-                                    upload_file_stream.getvalue(), "cover_mobile" + str(new_game_screenshots.screenshots_id) + ".webp"
+                                    upload_file_stream.getvalue(), "screen_mobile" + str(new_game_screenshots.screenshots_id) + ".webp"
                                 )
                                 f.close()
-                                new_game_cover.save()    
+                                new_game_screenshots.save()    
                             else: 
                                 new_game_screenshots.game_ids.add(new_game)
                     except KeyError:
@@ -180,6 +179,7 @@ def game_addition(data):
                             new_game_involved_companies.company_id = new_game_company
                             new_game_involved_companies.save()
                             new_game_involved_companies.game_ids.add(new_game)
+                            
 def genre_addition(data):
     for genres in data:
         new_genre,created = Genres.objects.get_or_create(genre_id = genres['id'])
