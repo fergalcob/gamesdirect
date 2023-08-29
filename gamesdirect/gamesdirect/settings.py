@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
     'djmoney',
     'import_export',
     'django_extensions',
