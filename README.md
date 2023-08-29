@@ -249,104 +249,87 @@ All pages display a fixed navbar that changes style based on the device in use. 
 
 #### Footer
 
-![Footer-Desktop](README/footer_desktop.png)
+![Footer-Desktop](README/footer-desktop.png)
 
 <details>
   <summary>Footer Mobile</summary>
   
-  ![Footer-Mobile-](README/footer_mobile.png)
+  ![Footer-Mobile](README/footer-mobile.png)
   
 </details>
 
 We display the footer section at present across all pages of the site. In the desktop view, this section is broken down into a three column view. In the first, we have a sign up form which allows users to sign up for the site newsletter via Mailchimp. By entering their email address, users will be sent a verification email to confirm their opting in. In the second column, we have the links to our social media platforms and in the third column we have our contact methods for the site which will allow users to reach out if needed. When viewed on mobile, this view switches to a single column layout with our sections descending in the same order as outlined in the desktop view.
 
-### Home Page
+#### Cart
+
+![Cart-Desktop](README/cart-desktop.png)
 
 <details>
-  <summary>Site Banner</summary>
+  <summary>Footer Mobile</summary>
   
-![Site-Logo](README/logo.png)  
+  ![Cart-Mobile](README/cart-mobile.png)
+  
 </details>
+
+I have added the cart as an offcanvas element which is accessible across all pages of the site. This cart updates dynamically via jQuery with items being added as the user browses the site. Via the cart they can update the quantity of individual items being purchased as the stock for the product allows. If removing items from the cart, if the quantity reaches zero the item will be fully removed from the cart. There is also a bin icon which allows for immediate deletion of the product from the cart. If a user attempts to add more than the stock allows the quantity will be limited at the amount of stock. Also within the cart, we have a dynamically adjusting total and a checkout button for creation of a Stripe checkout session. This component does not change between mobile and desktop, albeit with the cart covering roughly 33% of the page on the desktop and ~90% on mobile with a close button in place for mobile users.
+
+### Home Page
+ 
+![Site-Logo](README/logo.png)  
 
 When users first access the site through the home page, they will be presented with the banner image for the site. This banner was created with the site in mind, displaying the site name and containing images of the four gaming platforms that are targeted for sales on the site.
 
-![General-Layout-Desktop](README/general_layout_desktop.png)
+![General-Layout-Desktop](README/index-main-desktop.png)
 
 <details>
   <summary>Home Page Body Mobile</summary>
   
-  ![General-Layout-Mobile](README/general_layout_mobile.png)
-  ![General-Layout-Mobile2](README/general_layout_mobile_continued.png)
+  ![General-Layout-Mobile](README/index-main-mobile.png)
   
 </details>
 
+The index page is broken down into several sections: On Sale, New Release & Top Rated items. These items are truncated displays showing 8 items per category with 4 per row on larger displays switching to a two column layout on mobile. The product displays show the name and platform release of the item along with a notification of the current stock levels, when an item has no keys in stock the stock will show as Out of Stock and the Add to Cart button will be disabled. When an item has between 1 to 5 keys, there will be an indicator of low stock and the current number remaining. Above 5 keys will simply show as In Stock. Along with this, if an item is on sale, the percentage sale value will be shown in the cover image with the original price and sale price being shown in the card body content for the item.
 
-For all users they will also be able to see a collection of the most recent reviews left and collections published to the site with links to access the full version of the content selected. 
+As seen in the mobile screenshot, when hovering over the cover image for the item, the user will be presented with an Add to Wishlist button or if already present a Remove From Wishlist icon. Along with this, they will also be shown and Add To Cart button if in stock or disabled Out of Stock button if applicable. This button when used will dynamically add the product to the Cart and will be shown via the dynamic side cart.
 
-![Recent-And-Upcoming-Desktop](README/recent_and_upcoming_desktop.png)
+### Products Page/Search Results Page
+
+![Products-Page-Desktop](README/products-page-desktop.png)
 
 <details>
-  <summary>Recent & Upcoming Releases Mobile</summary>
+  <summary>Products Page Mobile</summary>
   
-  ![General-Layout-Mobile3](README/general_layout_mobile_end.png)
-  
-</details>
-
-Scrolling further down the page they will also be able to see some of the most recently released games and games to be released in the next month which is updated on each visit to the site so as to maintain the most up to date information. On mobile this layout switches to a single column view and reduces the amount of images displayed in the recently viewed, recently released and upcoming image carousels to prevent the images from becoming too small due to the default number displayed on larger devices.
-
-### Genre, Developers, Publishers Lists
-
-![Genre-List-Desktop](README/genre_list_desktop.png)
-
-<details>
-  <summary>Game Description Mobile</summary>
-  
-  ![Genre-List-Mobile](README/genre_list_mobile.png)
+  ![Products-Page-Mobile](README/products-page-mobile.png)
   
 </details>
 
-
-These pages provide an alphabetical list of the data available for the sections in question. The alphabetical list at the top of the page links to the specific letter in the page to prevent too much scrolling being needed by the user. After the user selects any of the pages within these sections they will be brought to the item pages described in the following section.
-
-### Search Results, Genre Items, Developer Items, Publisher Items
-
-![Search-Items-Desktop](README/search_items_desktop.png)
-
-<details>
-  <summary>Search Items Mobile</summary>
-  
-  ![Search-Items-Mobile](README/search_items_mobile_end.png)
-  
-</details>
-
-These above pages follow a similar layout due to their design intent as they are displaying a list of items that the user is searching for depending on their needs. The search results page pulls from the IGDB API and populates the content of the database based on the search while the other pages use the data that has already been retrieved to populate those pages. The search results page will return the thumbnail for the cover of the game searched for along with the name of the game along with a link to its description page. In addition to the previous data, the genre,developer and publisher item pages will also return the average review score for the games present based on user reviews and the total number of reviews that have been left for a game that have been used to calculate that average.
+The products page has a similar layout to the home page with a 4 column desktop and two column mobile view. To avoid excessive page length, these product pages have been divided into 16 item pages to allow them to display evenly across multiple pages. In addition to the product display the product pages also include some basic sort and filter functionality. The sort button allows users to sort by release date, alphabetically and from the aggregated review scores in ascending or descending orders. THe filter option then allows users to filter the items by genre allowing them to see all items of a particular chosen genre only.
 
 ### Game Description Page
 
-![Game-Description-Desktop](README/game_description_desktop.png)
+![Product-Page-Desktop-Top](README/product-page-desktop-top.png)
+
+![Product-Page-Desktop-Bottom](README/product-page-desktop-bottom.png)
 
 <details>
-  <summary>Game Description Mobile</summary>
+  <summary>Game Description Mobile - Top</summary>
   
-  ![Game-Description-Mobile](README/game_description_mobile.png)
+  ![Product-Page-Mobile-Top](README/product-page-mobile-top.png)
   
 </details>
 
-The top half of the page contains all the information on the game the user has selected as seen in the above screenshot. When a user has logged in they also have the option to add the game to their personal collection or to add it to a created collection if they have created any and if the game is already part of a collection/s they will also have the option to remove it from the collection they choose. 
-
-
-![Reviews-Section-Desktop](README/reviews_section_desktop.png)
-
 <details>
-  <summary>Reviews Section Mobile</summary>
+  <summary>Game Description Mobile - Bottom</summary>
   
-  ![Reviews-Section-Mobile](README/reviews_section_mobile.png)
+  ![Product-Page-Mobile-Bottom](README/product-page-mobile-bottom.png)
   
 </details>
 
-Below the game information, any reviews left will be displayed along with the option to display any comments if they have been left on a review. For a logged in user they will also be given the option to leave a review/reply to a comment and in addition to this if a user is already an author of a review/comment they will be given the option to edit/delete that content. If they choose to delete a comment, they will be prompted with a pop-up window asking them to confirm the deletion. If the user chooses to leave a review/comment the form field expands to show the text input fields including the text editor for comments/reviews.
+This page uses a split column layout which switches to a singular column when viewed on mobile. The top half containing any videos and screenshots for the selected game arranged via a carousel allowing the user to see more about the game. The second half then shows a partial cover image along with the price and stock levels. Users can also choose to add the item to the cart directly from this page also.
 
-### Profile Page
+The second half of the page is then broken into a Details section which gives a game summary and then an informational column showing release date, genres & production companys involved in the items development and release. These informational sections can also be used as filter links if desired by the user.
+
+### Orders Page
 
 ![Profile-Page-Desktop](README/my_profile_desktop.png)
 
@@ -357,8 +340,7 @@ Below the game information, any reviews left will be displayed along with the op
   
 </details>
 
-
-The users profile page contains their current profile information and profile picture if set or the default image if not. From here a user can access the content they've created for the site such as their reviews/comments, lists or personal collection. They can also update their profile picture and have options to update their password and profile data. 
+The orders page allows users to see any completed or pending orders on the account. By using Stripe webhooks the order status is updated automatically. These orders are then separated into accordion elements to minimize page length. When expanded the order will show the items and quantities that were in the account at the time of payment. If a payment has been completed, there will be an additional set of buttons to expand the activation key details for each purchased product. After the webhook has received a successful payment signal, in addition to updating the order, the stock level for the purchased items will also be updated automatically to prevent excess purchases.
 
 ### Reviews & Comments
 
@@ -447,6 +429,39 @@ For this project I've gone with a very simple color scheme throughout the site u
 ### Typography
 
 For the Navbar and section headers I've chosen to use Bruno Ace SC as a semi-futuristic style of font in keeping with the gaming theme of the website. For the banner image on the homepage I've chosen to use PF Tempesta Five as a throwback font to keep in with the gaming theme but to evoke the early blocky nature of text in games. For the general page text, I've chosen to use Montserrat as it presents a clean and easy to read font which we want in place for the majority portion of the site text.
+
+
+## E-Commerce Solutions
+
+This project is focused on being tailored to a B2C solution. In the past several years, the gaming space has switched to a more digital delivery focused platform, based on this the decision was made to focus on the site for the delivery of digital activation keys cutting down physical products being delivered. In this way we can deliver items to customers in a faster manner and feedback on issues is no longer reliant on delivery delays as it is an entirely digital product. As part of this, in order to increase the user base a number of additional solutions have been incorporated to extend this reach.
+
+### Mailchimp Newsletter
+
+<details>
+  <summary>Newsletter Sign-Up - Site</summary>
+  
+  ![Sign-Up-Site](README/sign-up-confirmation.png)
+  
+</details>
+
+<details>
+  <summary>Newsletter Sign-Up - Confirmation Email</summary>
+  
+  ![Sign-Up-Confirmation](README/sign-up-confirmation.png)
+  
+</details>
+
+Within the footer of the site, a sign-up form has been incorporated allowing users to provide their email address in order to sign-up for the site's newsletter. A message is displayed on successful submission of the email address and a verification email is sent to the provided email address for confirmation. By making this a double opt-in newsletter this helps cut down on any spam submissions and improving the reliability of the mailing list. The intention with the mailing list would be to include any details of new releases and new sales that have been started on the site in order to draw in recurring users.
+
+### Facebook Business Page 
+
+![Facebook-Business](README/facebook-business-mock-up.png)
+
+Above you can see a mock-up of a potential Facebook Business page for the storefront. The intention with the page would be to communicate upcoming releases and to promote sales on the site itself. It could also be used to directly communicate with users regarding stock queries/upcoming releases, with the footer of the main site also containing links to the store's Youtube and Twitch channels, new video and livestreaming content could also be addressed through this platform due to the immediacy of it as compared to the newsletter.
+
+### SEO
+
+Within the site itself, we have a sitemap.xml and robots.txt file in place for any search engines to index the site accordingly. In addition to this, the non-account pages also have a meta description with pages such as the individual game pages embedding the summary that users can see if accessing the full site. Other pages would have their descriptions tailored to the content displayed and to entice users to visit when ranked in the search results. A set of meta tags has also been added to each page with a focus on gaming and the digital distribution nature of the storefront. Each page has also some tailored meta tags to address the pages content such as product pages having the name of the item being sold on it included.
 
 ## Testing
 
