@@ -1,4 +1,4 @@
-![image](https://github.com/fergalcob/gamesdirect/assets/111295181/06aba411-55d2-45dc-a5d3-a36465baabc8)![Am-I-Responsive](README/amiresponsive.png)
+![Am-I-Responsive](README/amiresponsive.png)
 
 # Live Link
 [https://www.gamesdirect.shop/store_pages/]([https://gamedb-live.herokuapp.com/catalog/](https://www.gamesdirect.shop/store_pages/))
