@@ -12,5 +12,5 @@ class GameSitemap(Sitemap):
         return Game.objects.all()
     
     def location(self, obj):
-        return f'store_pages/products/{obj.slug}?platform={obj.platform}'
+        return f'/store_pages/products/{obj.slug}?platform={obj.platform}'
         
