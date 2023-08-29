@@ -39,7 +39,7 @@
 		<ul class="splide__list">
             {% if product_videos %}
             {% for videos in product_videos %}
-            <li class="splide__slide"><iframe src="" data-src="https://www.youtube.com/embed/{{ videos.video_id }}" frameborder="0" allowfullscreen class="w-100 h-100"></iframe></li>
+            <li class="splide__slide"><img src="https://i.ytimg.com/vi/{{ videos.video_id }}/hqdefault.jpg" alt="Trailer for {{ product.name }}"></li>
 
             {% endfor %}
             {% endif %}
