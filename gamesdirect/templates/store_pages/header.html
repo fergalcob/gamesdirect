@@ -3,7 +3,7 @@
 {% get_consoles as get_consoles_data %}
 {% block topbar %}
 <div class="container-fluid">
-<nav class="navbar navbar-dark navbar-direction navbar-expand-lg fixed-top p-2">
+<nav class="navbar navbar-direction navbar-expand-lg fixed-top p-2">
   
     <div class="d-flex w-100 mt-2">
     <h1 class="mt-2"><a class="navbar-brand navbar-brand-dark" href="{% url 'index' %}">GamesDirect</a></h1>
@@ -14,7 +14,7 @@
       <li class="nav-item">
         <div class="dropdown">
           <a href="#" class=" nav-link" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-user" title="User icon for opening user menu"></i>
           </a>
   
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
@@ -39,15 +39,15 @@
           </div></li>
       {% endif %}
       <li class="nav-item mx-1 ">   <button class="navbar-toggler d-inline" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-        <span ><i class="fa-solid fa-cart-shopping"></i></span>
+        <span ><i class="fa-solid fa-cart-shopping" title="Shopping Cart Icon to open My Cart"></i></span>
       </button></li> 
     </ul>
   </div>
-  <button class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-toggler ms-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span ><i class="fa-solid fa-bars"></i></span>
-  </button>
+  </a>
   </div>
-  <div class="row mt-2 mb-3"><div class="col-12 "><form class="form-inline my-2 my-lg-0 pe-2" action="{% url 'games' %}" method="post"> {% csrf_token %} <label><input type="text" name="search_query" class=" search-field p-2" placeholder="Search for games"></label><button id="search_button" type="submit" class="btn"><i class="fa-solid fa-magnifying-glass me-3" style="color: #eeeeee;"></i></button></form></div></div>
+  <div class="row mt-2 mb-3"><div class="col-12 "><form class="form-inline my-2 my-lg-0 pe-2" action="{% url 'games' %}" method="post"> {% csrf_token %} <label><input type="text" name="search_query" class=" search-field p-2" placeholder="Search for games"></label><button id="search_button" type="submit" class="btn"><i class="fa-solid fa-magnifying-glass me-3" style="color: #eeeeee;" title="Search Bar Icon"></i></button></form></div></div>
   <div class="row my-2 w-100">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto w-100 justify-content-around">
@@ -72,9 +72,6 @@
 
 
 <div class="container-fluid">
-  <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
   <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasNavbarLabel">My Cart</h5>
