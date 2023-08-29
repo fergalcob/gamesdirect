@@ -237,15 +237,15 @@ Graphviz was used to create the following image showing the database structure a
 ### Common Features
 
 #### Navbar
-![Navbar-Desktop](README/header_desktop.png)
+![Navbar-Desktop](README/index-desktop.png)
 <details>
   <summary>Navbar Mobile Closed & Expanded</summary>
   
-  ![Navbar-Mobile-Closed](README/header_mobile_closed.png)![Navbar-Mobile-Expanded](README/header_mobile_expanded.png)
+  ![Navbar-Mobile-Closed](README/index-mobile.png)![Navbar-Mobile-Expanded](README/index-mobile-expanded.png)
   
 </details>
 
-All pages display a fixed navbar that switches to a hamburger style dropdown menu when viewing on lower resolution devices. This navbar contains links to all current main sub-sections and to the homepage. The logo for the site is included on the navbar and stays even when in responsive modes. To prevent the navbar from becoming overcrowded, the Games section and Profile section when logged in both have separate dropdown menus for their own navigation. When a user is not logged in they are are presented with a Sign-In or Sign-Up option for them to create/access their own account. When logged in these options are replaced by the username of the logged in user.
+All pages display a fixed navbar that changes style based on the device in use. This navbar is separated into three rows, the first contains the site name as logo on the left and on the right we have the user options and cart display button. The second contains the search bar for the site, splitting this into its own row allows for more space to be used for the search field and to draw the users eye. The third row then contains the platform links to bring users to the chosen products pages. This row when viewed on mobile is converted into a hamburger style expanding menu which is added next to the cart icon in the top row of the navbar.
 
 #### Footer
 
@@ -258,20 +258,17 @@ All pages display a fixed navbar that switches to a hamburger style dropdown men
   
 </details>
 
-Currently the footer uses a split row design to differentiate between site content and informational content. Links to the various site pages are contained in one and could in future be used to also contain social media links for the site. The bottom row of the footer currently contains a simple copyright detail for the site itself. With the site links, they display in a separated grid to give space when viewing on larger displays, switching to a column layout on mobile/tablets.
+We display the footer section at present across all pages of the site. In the desktop view, this section is broken down into a three column view. In the first, we have a sign up form which allows users to sign up for the site newsletter via Mailchimp. By entering their email address, users will be sent a verification email to confirm their opting in. In the second column, we have the links to our social media platforms and in the third column we have our contact methods for the site which will allow users to reach out if needed. When viewed on mobile, this view switches to a single column layout with our sections descending in the same order as outlined in the desktop view.
 
 ### Home Page
 
-![Recently-Viewed-Desktop](README/recently_viewed_desktop.png)
-
 <details>
-  <summary>Recently Viewed Mobile</summary>
+  <summary>Site Banner</summary>
   
-  ![Recently-Viewed-Mobile](README/recently_viewed_mobile.png)
-  
+![Site-Logo](README/logo.png)  
 </details>
 
-On a users initial access to the page the first item they will encounter will be the introductory text which gives them an overview of the sites goals. On creation of an account, the logged in user will also be presented with a list of their recently viewed games above this introductory text. 
+When users first access the site through the home page, they will be presented with the banner image for the site. This banner was created with the site in mind, displaying the site name and containing images of the four gaming platforms that are targeted for sales on the site.
 
 ![General-Layout-Desktop](README/general_layout_desktop.png)
 
