@@ -448,7 +448,7 @@ For this project I decided on a simple dark colour design with a limited number 
 
 ### Typography
 
-For the Navbar I've chosen to use Bruno Ace SC as a semi-futuristic style of font in keeping with the gaming theme of the website. With the remainder of the content, I've chosen to use Ubuntu Light for the text due to its light and simple nature and readability.
+For the Navbar and section headers I've chosen to use Bruno Ace SC as a semi-futuristic style of font in keeping with the gaming theme of the website. For the banner image on the homepage I've chosen to use PF Tempesta Five as a throwback font to keep in with the gaming theme but to evoke the early blocky nature of text in games. For the general page text, I've chosen to use Montserrat as it presents a clean and easy to read font which we want in place for the majority portion of the site text.
 
 ## Testing
 
