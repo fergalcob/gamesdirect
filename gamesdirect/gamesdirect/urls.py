@@ -17,9 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from store_pages.views import CustomPasswordChangeView, CustomEmailView 
+from django.contrib.sitemaps import GenericSitemap  # new
+from django.contrib.sitemaps.views import sitemap  # new
+from django.urls import path, include
+from gamesdirect.sitemap import GameSitemap
+
+sitemaps = {
+    'games': GameSitemap,
+}
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+path("sitemap.xml",sitemap,{"sitemaps": sitemaps},name="django.contrib.sitemaps.views.sitemap",),    
+path('admin/', admin.site.urls),
 ]
 
 from django.urls import include
