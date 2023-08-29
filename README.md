@@ -1,7 +1,7 @@
-![Am-I-Responsive](README/amiresponsive.png)
+![image](https://github.com/fergalcob/gamesdirect/assets/111295181/06aba411-55d2-45dc-a5d3-a36465baabc8)![Am-I-Responsive](README/amiresponsive.png)
 
 # Live Link
-[https://gamedb-live.herokuapp.com/catalog/](https://gamedb-live.herokuapp.com/catalog/)
+[https://www.gamesdirect.shop/store_pages/]([https://gamedb-live.herokuapp.com/catalog/](https://www.gamesdirect.shop/store_pages/))
 
 ## Table of Contents
 
@@ -146,126 +146,84 @@ These wireframes showing the initial concepts for the layout of the site were cr
 <details>
   <summary>Index Page - Desktop</summary>
   
-  ![Index-Page-Desktop](README/wireframe_index_desktop.png)
+  ![Index-Page-Desktop](README/Index Desktop.png)
   
 </details>
 
 <details>
   <summary>Index Page - Mobile</summary>
   
-  ![Index-Page-Mobile](README/wireframe_home_mobile.png)
+  ![Index-Page-Mobile](README/Index Mobile.png)
   
 </details>
 
 <details>
-  <summary>Game Description Page - Desktop</summary>
+  <summary>Index Page w/ Cart - Desktop</summary>
   
-  ![Game-Description-Desktop](README/wireframe_game_description_desktop.png)
-  
-</details>
-
-<details>
-  <summary>Game Description Page - Mobile</summary>
-  
-  ![Game-Description-Mobile](README/wireframe_game_description_mobile.png)
+  ![Index-Page-Desktop-Cart](README/Index with Cart Desktop.png)
   
 </details>
 
 <details>
-  <summary>Forms Pages(Signin, Register, Password Change, Profile Change) - Desktop</summary>
+  <summary>Index Page w/ Cart - Mobile</summary>
   
-  ![Forms-Pages-Desktop](README/wireframe_forms_desktop.png)
-  
-</details>
-
-<details>
-  <summary>Forms Pages(Signin, Register, Password Change, Profile Change) - Mobile</summary>
-  
-  ![Forms-Pages-Mobile](README/wireframe_forms_mobile.png)
+  ![Index-Page-Mobile-Cart](README/Index With Cart Mobile.png)
   
 </details>
 
 <details>
-  <summary>Alphabetical List Pages(Genres, Developers, Publishers) - Desktop</summary>
+  <summary>Products Page - Desktop</summary>
   
-  ![Alphabetical-Lists-Desktop](README/wireframe_alphabetical_lists_desktop.png)
-  
-</details>
-
-<details>
-  <summary>Alphabetical List Pages(Genres, Developers, Publishers) - Mobile</summary>
-  
-  ![Alphabetical-Lists-Mobile](README/wireframe_alphabetical_lists_mobile.png)
+  ![Products-Page-Desktop](README/Products Desktop.png)
   
 </details>
 
 <details>
-  <summary>Search Result Pages(Search Results, Genres, Developers, Publishers) - Desktop</summary>
+  <summary>Products Page - Mobile</summary>
   
-  ![Search-Results-Desktop](README/wireframe_searches_desktop.png)
-  
-</details>
-
-<details>
-  <summary>Search Result Pages(Search Results, Genres, Developers, Publishers) - Mobile</summary>
-  
-  ![Search-Results-Mobile](README/wireframe_searches_mobile.png)
+  ![Products-Page-Mobile](README/Products Mobile.png)
   
 </details>
 
 <details>
-  <summary>Profile Page - Desktop</summary>
+  <summary>Product Page - Desktop</summary>
   
-  ![Profile-Desktop](README/wireframe_profile_desktop.png)
-  
-</details>
-
-<details>
-  <summary>Profile Page - Mobile</summary>
-  
-  ![Profile-Mobile](README/wireframe_profile_mobile.png)
+  ![Product-Page-Desktop](README/Product Page Desktop.png)
   
 </details>
 
 <details>
-  <summary>Reviews & Comments Page - Desktop</summary>
+  <summary>Product Page - Mobile</summary>
   
-  ![Reviews-And-Comments-Desktop](README/wireframe_reviews&comments_desktop.png)
-  
-</details>
-
-<details>
-  <summary>Reviews & Comments Page - Mobile</summary>
-  
-  ![Reviews-And-Comments-Mobile](README/wireframe_reviews&comments_mobile.png)
+  ![Product-Page-Mobile](README/Product Page Mobile.png)
   
 </details>
 
 <details>
-  <summary>Collections Overview Page - Desktop</summary>
+  <summary>Orders Page - Desktop</summary>
   
-  ![Collections-Overview-Desktop](README/wireframe_collections_overview_desktop.png)
-  
-</details>
-
-<details>
-  <summary>Collections Overview Page - Mobile</summary>
-  
-  ![Collections-Overview-Mobile](README/wireframe_collections_overview_mobile.png)
+  ![Orders-Page-Desktop](README/Orders Desktop.png)
   
 </details>
 
 <details>
-  <summary>Collection Items Page - Desktop</summary>
+  <summary>Orders Page - Mobile</summary>
   
-  ![Collection-Items-Desktop](README/wireframe_collections_desktop.png)
+  ![Orders-Page-Mobile](README/Orders Mobile.png)
   
 </details>
 
 <details>
-  <summary>Collection Items Page - Mobile</summary>
+  <summary>Profile Change Page - Desktop</summary>
   
-  ![Collection-Items-Mobile](README/wireframe_collections_mobile.png)
+  ![Profile-Change-Page-Desktop](README/Profile Change Desktop.png)
+  
+</details>
+
+<details>
+  <summary>Profile Change Page - Mobile</summary>
+  
+  ![Profile-Change-Page-Mobile](README/Change Details Mobile.png)
   
 </details>
 
