@@ -566,7 +566,7 @@ The results of all testing performed can be found in the TESTING.md file [here](
 
 * Before deploying the app, the config variables need to be set up in the Settings tab
 
-* For this project, due to the use of AWS for serving media/static files and also for hosting the database, we need to configure the following vars: AWS_ACCESS_KEY_ID, AWS_DEFAULT_ACL, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME, DATABASE_URL, USE_S3 to ensure all keys are secure
+* For this project, due to the use of AWS for serving media/static files and also for hosting the database, we need to configure the following vars: AWS_ACCESS_KEY_ID, AWS_DEFAULT_ACL, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME, DATABASE_URL, USE_S3, MAILCHIMP_API_KEY, MAILCHIMP_TRANSACTIONAL_API, STRIPE_PUBLISHABLE_KEY & STRIPE_SECRET_KEY to ensure all keys are secure
 
 * Optionally, while still in development DISABLE_COLLECTSTATIC can be set to 1 temporarily to prevent static files from being collected on deployment. When hosting on AWS, it can take some time for this to complete and so this option is not needed on all deployments but be sure to remove or set to 0 when doing the final deployment
 
