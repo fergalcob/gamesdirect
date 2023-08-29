@@ -1,0 +1,10 @@
+User-Agent: Googlebot
+User-Agent: Bingbot
+
+Allow: /store_pages
+Allow: /blog
+
+Disallow: /accounts
+Disallow: /store_pages/account
+
+Sitemap: https://www.gamesdirect.shop/sitemap.xml

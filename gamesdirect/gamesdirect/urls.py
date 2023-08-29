@@ -21,6 +21,8 @@ from django.contrib.sitemaps import GenericSitemap  # new
 from django.contrib.sitemaps.views import sitemap  # new
 from django.urls import path, include
 from gamesdirect.sitemap import GameSitemap
+from django.views.generic.base import TemplateView
+
 
 sitemaps = {
     'games': GameSitemap,
@@ -28,6 +30,7 @@ sitemaps = {
 
 urlpatterns = [
 path("sitemap.xml",sitemap,{"sitemaps": sitemaps},name="django.contrib.sitemaps.views.sitemap",),    
+path('robots.txt', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 path('admin/', admin.site.urls),
 ]
 
