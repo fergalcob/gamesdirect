@@ -30,7 +30,7 @@ def stripe_config(request):
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == 'GET':
-        domain_url = 'https://www.gamesdirect.shop'
+        domain_url = 'https://www.gamesdirect.shop/'
         stripe.api_key = settings.STRIPE_SECRET_KEY
         user_cart = CurrentCart.objects.get(owner=request.user)
         order_length = 16
