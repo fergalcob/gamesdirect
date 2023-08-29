@@ -264,10 +264,9 @@ def game_addition(data):
                                 new_game_company.save()
 
                             new_game_involved_companies = Involved_companies()
-                            new_game_involved_companies.involved_companies_id =
-                            involved_companies[
-                                "id"
-                            ]
+                            (new_game_involved_companies
+                             .involved_companies_id) = (
+                             involved_companies["id"])
                             new_game_involved_companies.publisher = (
                                 involved_companies["publisher"]
                             )
