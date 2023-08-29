@@ -1,5 +1,9 @@
 {% extends "store_pages/base_template.html" %}
+{% block title %}
+ - {{ product.name }}
+{% endblock %}
 {% block meta %}
+<meta name="description" content="{{ product.summary }}">
 <meta name="keywords" content="{{ product.name }}, game download, gameplay, storyline, gameplay videos, in-game screenshots, digital purchase, gaming experience. {{ product.first_release }}, digital downloads, ">
 {% endblock %}
 {% block style %}
