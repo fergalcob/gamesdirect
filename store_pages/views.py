@@ -454,3 +454,13 @@ def change_details(request):
             'current_emailaddress': EmailAddress.objects.get_verified(request.user)
         }
         return render(request,"account/change_details.html", context = context)
+    
+def my_orders(request):
+    if request.user.is_authenticated:
+        my_order_list = Orders.objects.filter(owner_id = request.user)
+    
+    context = {
+        'my_orders' : my_order_list
+    }
+
+    return render(request,"store_pages/my_orders.html", context = context)
