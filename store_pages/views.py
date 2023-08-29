@@ -27,27 +27,43 @@ from io import BytesIO
 import urllib.request
 from django.core.paginator import Paginator
 
+
+
 import secrets
 import string
 
-def index(request):
-    on_sale = Game.objects.filter(sale_discount__gte=1).order_by("?")[:8]
-    new_releases = Game.objects.filter().order_by("-first_release")[:8]
-    top_rated = Game.objects.filter().order_by("-aggregated_rating")[:8]
+logger = logging.getLogger(__name__)
+with open('store_pages/pc_response.json', encoding='utf-8') as f:
+   data = json.load(f)
 
-    context = {
-        "on_sale" : on_sale,
-        "new_releases" : new_releases,
-        "top_rated" : top_rated
-    }
-    return render(request,"store_pages/index.html", context=context)
 
+
+class CustomPasswordChangeView(PasswordChangeView):
+    template_name = "account/change_details.html"
+    success_url = reverse_lazy('change_details')
+
+    def form_invalid(self, form):
+        password_change_form = form
+        email_form = AddEmailForm()
+        return render(self.request, self.template_name, {'password_change_form': password_change_form, 'email_form': email_form,"emailaddresses": list(EmailAddress.objects.filter(user=self.request.user).order_by("email")), "new_emailaddress": EmailAddress.objects.get_new(self.request.user),"current_emailaddress": EmailAddress.objects.get_verified(self.request.user)})
+    
+class CustomEmailView(EmailView):
+    template_name = 'account/change_details.html'
+    success_url = reverse_lazy('change_details')
+
+    def form_invalid(self, form):
+        email_form = form
+        password_change_form = ChangePasswordForm()
+        return render(self.request, self.template_name, {'password_change_form': password_change_form, 'email_form': email_form, "emailaddresses": list(EmailAddress.objects.filter(user=self.request.user).order_by("email")), "new_emailaddress": EmailAddress.objects.get_new(self.request.user),"current_emailaddress": EmailAddress.objects.get_verified(self.request.user)})
+
+   
 def game_addition(data):
     for games in data:
         for platforms in games['game']['platforms']:
             if platforms in [6,130,167,169]:
                 new_game,created = Game.objects.get_or_create(game_id = games['game']['id'],platform=platforms)
                 if created is True:
+                    print('hello')
                     new_game.game_id = games['game']['id']
                     new_game.aggregated_rating_count = games['game']['aggregated_rating_count']
                     new_game.platform = platforms
@@ -66,6 +82,7 @@ def game_addition(data):
                         new_game_cover.cover_id = games['game']['cover']['id']
                         new_game_cover.save()
                         new_game_cover.game_ids.add(new_game)
+                        print('https:' + new_game_cover.url_thumbnail)
                         urllib.request.urlretrieve(
                                 new_game_cover.url_thumbnail,
                                 str(new_game_cover.cover_id) + "_thumb.png")
@@ -121,6 +138,7 @@ def game_addition(data):
                                 new_game_screenshots.url = screenshots['url']
                                 new_game_screenshots.save()
                                 new_game_screenshots.game_ids.add(new_game)
+                                print(new_game_screenshots.url)
                                 urllib.request.urlretrieve(
                                         new_game_screenshots.url,
                                         str(new_game_screenshots.screenshots_id) + ".png")
@@ -171,12 +189,6 @@ def genre_addition(data):
             new_genre.name = genres['name']
             new_genre.save()
 
-def sale_generation():
-    random_games = Game.objects.filter().order_by("?")[:40]
-    for each_game in random_games:
-        each_game.sale_discount = random.randint(1, 50)
-        each_game.save()
-
 def stock_assignment():
     game_keys = Game.objects.filter().order_by("?")[:75]
     for games in game_keys:
@@ -186,6 +198,50 @@ def stock_assignment():
             order_number_generator = ''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))+'-'+''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))+'-'+''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))+'-'+''.join(secrets.choice(string.ascii_uppercase + string.digits)for i in range(order_length))
             games.keys_in_stock.append(order_number_generator)
             games.save()
+def sale_generation():
+    random_games = Game.objects.filter().order_by("?")[:40]
+    for each_game in random_games:
+        each_game.sale_discount = random.randint(1, 50)
+        each_game.save()
+
+
+def index(request):
+    on_sale = Game.objects.filter(sale_discount__gte=1).order_by("?")[:8]
+    new_releases = Game.objects.filter().order_by("-first_release")[:8]
+    top_rated = Game.objects.filter().order_by("-aggregated_rating")[:8]
+
+    context = {
+        "on_sale" : on_sale,
+        "new_releases" : new_releases,
+        "top_rated" : top_rated
+    }
+    return render(request,"store_pages/index.html", context=context)
+
+def my_wishlist(request):
+    if request.user.is_authenticated:
+        my_wishlist = Wishlist.objects.get(owner=request.user)
+        context = {
+            'my_wishlist' : my_wishlist
+        }
+        return render(request,"account/my_wishlist.html",context=context)
+
+
+def add_to_wishlist(request):
+    my_wishlist,created = Wishlist.objects.get_or_create(owner=request.user)
+    my_wishlist.save()
+    my_wishlist.wishlist_items.add(Game.objects.get(Q(game_id=request.POST['item_id'])& Q(platform=request.POST['platform_id']))) 
+    print(my_wishlist.wishlist_items.all())
+    return render(request,"store_pages/index.html")
+
+def remove_from_wishlist(request):
+    game_to_remove = Game.objects.get(Q(game_id=request.POST['item_id']) & Q(platform=request.POST['platform_id']))
+    my_wishlist = Wishlist.objects.get(owner=request.user)
+    my_wishlist.wishlist_items.remove(game_to_remove)
+    my_wishlist.save()
+
+    return render(request,"account/my_wishlist.html")
+
+
 
 def games(request):
     genres = Genres.objects.all()
@@ -279,6 +335,7 @@ def games(request):
         chosen_selector = 'search'
         referrer = None
         search_query = request.POST['search_query']
+        print(search_query)
         game_list = Game.objects.filter(name__icontains=search_query)
 
     page_number = request.GET.get("page")
@@ -303,6 +360,7 @@ def products(request, pk):
     product_genres = Genres.objects.filter(genre_id__in=product.genres)
     product_publisher = Involved_companies.objects.filter(Q(game_ids__game_id = product.game_id) & Q(game_ids__platform=platform_id) & Q(publisher = True))
     product_developer = Involved_companies.objects.filter(Q(game_ids__game_id = product.game_id) & Q(game_ids__platform=platform_id) & Q(developer = True))
+    print(product_developer)
     context = {
         'product':product,
         'product_videos' :product_videos,
@@ -313,38 +371,6 @@ def products(request, pk):
         'product_developer' : product_developer
     }
     return render(request,"store_pages/product_page.html", context=context)
-
-def add_to_wishlist(request):
-    my_wishlist,created = Wishlist.objects.get_or_create(owner=request.user)
-    my_wishlist.save()
-    my_wishlist.wishlist_items.add(Game.objects.get(Q(game_id=request.POST['item_id'])& Q(platform=request.POST['platform_id']))) 
-    return render(request,"store_pages/index.html")
-
-def remove_from_wishlist(request):
-    game_to_remove = Game.objects.get(Q(game_id=request.POST['item_id']) & Q(platform=request.POST['platform_id']))
-    my_wishlist = Wishlist.objects.get(owner=request.user)
-    my_wishlist.wishlist_items.remove(game_to_remove)
-    my_wishlist.save()
-
-    return render(request,"account/my_wishlist.html")
-
-class CustomPasswordChangeView(PasswordChangeView):
-    template_name = "account/change_details.html"
-    success_url = reverse_lazy('change_details')
-
-    def form_invalid(self, form):
-        password_change_form = form
-        email_form = AddEmailForm()
-        return render(self.request, self.template_name, {'password_change_form': password_change_form, 'email_form': email_form,"emailaddresses": list(EmailAddress.objects.filter(user=self.request.user).order_by("email")), "new_emailaddress": EmailAddress.objects.get_new(self.request.user),"current_emailaddress": EmailAddress.objects.get_verified(self.request.user)})
-    
-class CustomEmailView(EmailView):
-    template_name = 'account/change_details.html'
-    success_url = reverse_lazy('change_details')
-
-    def form_invalid(self, form):
-        email_form = form
-        password_change_form = ChangePasswordForm()
-        return render(self.request, self.template_name, {'password_change_form': password_change_form, 'email_form': email_form, "emailaddresses": list(EmailAddress.objects.filter(user=self.request.user).order_by("email")), "new_emailaddress": EmailAddress.objects.get_new(self.request.user),"current_emailaddress": EmailAddress.objects.get_verified(self.request.user)})
 
 def add_to_cart(request):
     test_cart, created = CurrentCart.objects.get_or_create(owner=request.user)
@@ -363,11 +389,13 @@ def add_to_cart(request):
             'item_platform' : add_product.platform,
             'item_console' : console.name
         }
+        print(cart_items)
         test_cart.cart_items['current_cart'].append(cart_items)
     else:
         cart_item_test = next((item for item in test_cart.cart_items['current_cart'].copy() if item['item_id'] == add_product.id), None)
         if cart_item_test is not None:
             cart_item_test['item_quantity'] = cart_item_test['item_quantity'] + 1
+            print(cart_item_test)
         else:
             cart_items = {
             'item_id' : add_product.id,
@@ -386,6 +414,20 @@ def add_to_cart(request):
 
     return JsonResponse({'current_total_json':list("current_total"), 'current_cart':list("product_list")})
 
+def change_details(request):
+    if request.user.is_authenticated:
+        emailform = AddEmailForm()
+        passwordform = ChangePasswordForm()
+        context = {
+            'email_form' : emailform,
+            'password_change_form' : passwordform,
+            'emailaddresses': list(EmailAddress.objects.filter(user=request.user).order_by("email")),
+            'new_emailaddress': EmailAddress.objects.get_new(request.user),
+            'current_emailaddress': EmailAddress.objects.get_verified(request.user)
+        }
+        return render(request,"account/change_details.html", context = context)
+
+
 def remove_from_cart(request):
     remove_item = request.POST['cart_item_id']
     get_user_cart = CurrentCart.objects.get(owner=request.user)
@@ -397,6 +439,7 @@ def remove_from_cart(request):
 
 def update_cart(request):
     new_quantity = request.POST['item_quantity']
+    print(new_quantity)
     if int(new_quantity) == 0:
         remove_from_cart(request)
     else:
@@ -411,15 +454,25 @@ def update_cart(request):
     
     return JsonResponse({'current_total_json':list("current_total"), 'current_cart':list("product_list")})
 
+
 def calculate_total(cart_status):
     price_calculation = 0
     for products in cart_status:
         price_calculation += float(products['item_price']) * float  (products['item_quantity'])
     return price_calculation
 
+
+mailchimp = Client()
+mailchimp.set_config({
+  'api_key': settings.MAILCHIMP_API_KEY,
+  'server': settings.MAILCHIMP_REGION,
+})
+
+
 def subscribe_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
+        print(form)
         if form.is_valid():
             try:
                 form_email = form.cleaned_data['email']
@@ -440,21 +493,9 @@ def subscribe_view(request):
                 logger.error(f'An exception occurred: {error.text}')
                 return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
+
     return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
-def change_details(request):
-    if request.user.is_authenticated:
-        emailform = AddEmailForm()
-        passwordform = ChangePasswordForm()
-        context = {
-            'email_form' : emailform,
-            'password_change_form' : passwordform,
-            'emailaddresses': list(EmailAddress.objects.filter(user=request.user).order_by("email")),
-            'new_emailaddress': EmailAddress.objects.get_new(request.user),
-            'current_emailaddress': EmailAddress.objects.get_verified(request.user)
-        }
-        return render(request,"account/change_details.html", context = context)
-    
 def my_orders(request):
     if request.user.is_authenticated:
         my_order_list = Orders.objects.filter(owner_id = request.user)
@@ -464,3 +505,4 @@ def my_orders(request):
     }
 
     return render(request,"store_pages/my_orders.html", context = context)
+
