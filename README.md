@@ -146,84 +146,84 @@ These wireframes showing the initial concepts for the layout of the site were cr
 <details>
   <summary>Index Page - Desktop</summary>
   
-  ![Index-Page-Desktop](README/Index Desktop.png)
+  ![Index-Page-Desktop](README/Index_Desktop.png)
   
 </details>
 
 <details>
   <summary>Index Page - Mobile</summary>
   
-  ![Index-Page-Mobile](README/Index Mobile.png)
+  ![Index-Page-Mobile](README/Index_Mobile.png)
   
 </details>
 
 <details>
   <summary>Index Page w/ Cart - Desktop</summary>
   
-  ![Index-Page-Desktop-Cart](README/Index with Cart Desktop.png)
+  ![Index-Page-Desktop-Cart](README/Index_with_Cart_Desktop.png)
   
 </details>
 
 <details>
   <summary>Index Page w/ Cart - Mobile</summary>
   
-  ![Index-Page-Mobile-Cart](README/Index With Cart Mobile.png)
+  ![Index-Page-Mobile-Cart](README/Index_With_Cart_Mobile.png)
   
 </details>
 
 <details>
   <summary>Products Page - Desktop</summary>
   
-  ![Products-Page-Desktop](README/Products Desktop.png)
+  ![Products-Page-Desktop](README/Products_Desktop.png)
   
 </details>
 
 <details>
   <summary>Products Page - Mobile</summary>
   
-  ![Products-Page-Mobile](README/Products Mobile.png)
+  ![Products-Page-Mobile](README/Products_Mobile.png)
   
 </details>
 
 <details>
   <summary>Product Page - Desktop</summary>
   
-  ![Product-Page-Desktop](README/Product Page Desktop.png)
+  ![Product-Page-Desktop](README/Product_Page_Desktop.png)
   
 </details>
 
 <details>
   <summary>Product Page - Mobile</summary>
   
-  ![Product-Page-Mobile](README/Product Page Mobile.png)
+  ![Product-Page-Mobile](README/Product_Page_Mobile.png)
   
 </details>
 
 <details>
   <summary>Orders Page - Desktop</summary>
   
-  ![Orders-Page-Desktop](README/Orders Desktop.png)
+  ![Orders-Page-Desktop](README/Orders_Desktop.png)
   
 </details>
 
 <details>
   <summary>Orders Page - Mobile</summary>
   
-  ![Orders-Page-Mobile](README/Orders Mobile.png)
+  ![Orders-Page-Mobile](README/Orders_Mobile.png)
   
 </details>
 
 <details>
   <summary>Profile Change Page - Desktop</summary>
   
-  ![Profile-Change-Page-Desktop](README/Profile Change Desktop.png)
+  ![Profile-Change-Page-Desktop](README/Profile_Change_Desktop.png)
   
 </details>
 
 <details>
   <summary>Profile Change Page - Mobile</summary>
   
-  ![Profile-Change-Page-Mobile](README/Change Details Mobile.png)
+  ![Profile-Change-Page-Mobile](README/Change_Details_Mobile.png)
   
 </details>
 
