@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'store_pages',
-    'account_access',
     'checkout',
     'django.contrib.admin',
     'django.contrib.auth',
