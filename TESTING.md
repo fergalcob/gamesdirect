@@ -87,6 +87,8 @@ Payment Completion | On completion of payment, user is returned to their orders 
 Webhook Integration | Stripe webhook is added and successfully returns status of payment within project | As Expected | Pass
 Email Notification | When webhook receives payment notification, an email is triggered to the users email address notifying them of order status | As Expected | Pass
 Site Notification | Status of order is updated on orders page after receipt of webhook signal | As Expected | Pass
+Payment Type - Delayed Success | Order is confirmed after using delayed payment method | Unable to test with Stripe test payments options, hook has been tied in to async success however | Unknown
+Payment Type - Delayed Failure | Order is confirmed after using delayed payment method | Unable to test with Stripe test payments options, hook has been tied in to async failure | Unknown
 
 ### Orders
 
