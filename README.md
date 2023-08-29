@@ -260,7 +260,7 @@ We display the footer section at present across all pages of the site. In the de
 ![Cart-Desktop](README/cart-desktop.png)
 
 <details>
-  <summary>Footer Mobile</summary>
+  <summary>Cart Mobile</summary>
   
   ![Cart-Mobile](README/cart-mobile.png)
   
