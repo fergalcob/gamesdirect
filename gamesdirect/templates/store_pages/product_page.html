@@ -12,7 +12,7 @@
 {% block content %}
 
 <div>
-    <h1>{{ product.name }}</h1>
+    <h2>{{ product.name }}</h2>
 </div>
 <div class="container-fluid">
     <div class="row">
@@ -39,7 +39,7 @@
 		<ul class="splide__list">
             {% if product_videos %}
             {% for videos in product_videos %}
-            <li class="splide__slide"><img src="https://i.ytimg.com/vi/{{ videos.video_id }}/hqdefault.jpg" alt="Trailer for {{ product.name }}"></li>
+            <li class="splide__slide"><img src="https://i.ytimg.com/vi/{{ videos.video_id }}/hqdefault.jpg" alt="Trailer for {{ product.name }}" class="card-img-top"></li>
 
             {% endfor %}
             {% endif %}
@@ -84,7 +84,6 @@
 <p class=" w-100"><span>Release Date:</span><span class="float-end">{{ product.first_release }}</span></p>
 
 
-</div>
 </div>
 </div>
 {% endblock %}
