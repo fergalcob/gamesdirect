@@ -59,7 +59,7 @@
       <i type="button" class="fa-regular fa-heart wishlist-login me-3 games-{{ games.id }}" data-id="{{ games.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
   </i>
 
-              <button type="button" class="btn btn-secondary add-to-cart games-{{ games.id }}" data-id="{{ games.game_id }}">Add To Cart</button>
+              <button type="button" class="btn btn-secondary games-{{ games.id }}" data-id="{{ games.game_id }}" data-bs-target="#exampleModalCenter">Add To Cart</button>
 
   
       {% endif %}
@@ -100,7 +100,7 @@
         
       </div>
       <div class="modal-body">
-        <p>Please sign in to add to your wishlist.</p>
+        <p>Please sign in to add to your wishlist or purchase items.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
