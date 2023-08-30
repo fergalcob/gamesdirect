@@ -6,6 +6,13 @@
   * [Newsletter Subscriptions](#newsletter-subscriptions)
   * [Cart Functionality](#cart-functionality)
   * [Checkout Functionality](#checkout-functionality)
+ - [Code Validation](#code-validation)
+  * [W3C Validation](#w3c-validation)
+  * [CSS Validation](#css-validation)
+  * [PEP8 Testing](#pep8-testing)
+- [Devices Tested](#devices-tested)
+- [Bugs & Known Issues](#bugs--known-issues)
+    
  
 
 ## Manual Testing
@@ -99,5 +106,49 @@ Stock Updates | Keys added to successful orders are removed from original items 
 Out Of Stock | Games displayed on site disable purchase button when no keys are in stock | As Expected | Pass
 Low Stock | If a product has 5 or less keys in stock, a message is displayed on the product page and all other game pages | As Expected | Pass
 
+### CSS Validation
+
+The CSS was run through the W3C CSS validator to ensure no errors were found and the results are as follows
+
+<details>
+  <summary>CSS Validation</summary>
+  
+  ![CSS-Validation](TESTING/css_validation.png)
+  
+</details>
+
+### PEP8 Testing
+
+Code for Checkout and Store Pages views were run through CI's PEP8 tester to ensure Python standards were met.
+
+<details>
+  <summary>Checkout PEP8 Validation</summary>
+  
+  ![Checkout-PEP8-Validation](TESTING/checkout-page-lint.png)
+  
+</details>
+
+<details>
+  <summary>Store Pages PEP8 Validation</summary>
+  
+  ![Store-Pages-PEP8-Validation](TESTING/store-pages-lint.png)
+  
+</details>
+
+
+## Known Issues
+
+### Devices Tested
+
+* Acer Nitro 5 laptop at 1920 * 1080
+* Realme 7 Pro
+* Valve Steamdeck 1280 * 800
+* Lenovo tablet
+* Simulated other devices via responsive mode
+
+### Bugs & Known Issues
+
+* One bug is related to the DNS forwarding, as the CNAME is set up for www.gamesdirect.shop and the domain gamesdirect.shop is being forwarded to the subdomain, if you receive a 404 page by going via gamesdirect.shop/non-existant for example, a generic 404 page is shown in place of the correct gamesdirect 404
+* One issue related to the wishlist is that if a user removes the last remaining item on their wishlist while on the wishlist page, the message reporting that they do not have any items on their wishlist is not rendered until the next load of the page
 
 
