@@ -123,6 +123,9 @@ def stripe_webhook(request):
             + status_update.order_number
             + ") has been completed. You can find your activation keys"
             " at the following URL:</p>"
+            " <a href='https://www.gamesdirect.shop/store_pages"
+            "/account/my_orders'>https://www.gamesdirect."
+            "shop/store_pages/account/my_orders</a>"
             "<p>All the best,</p>"
             "<p>The GamesDirect Team</p>"
             '<a href="https://www.gamesdirect.shop">GamesDirect</a>',
@@ -176,6 +179,9 @@ def stripe_webhook(request):
             + status_update.order_number
             + ") has been completed. You can find your activation keys at"
             " the following URL:</p>"
+            " <a href='https://www.gamesdirect.shop/store_pages"
+            "/account/my_orders'>https://www.gamesdirect."
+            "shop/store_pages/account/my_orders</a>"
             "<p>All the best,</p>"
             "<p>The GamesDirect Team</p>"
             '<a href="https://www.gamesdirect.shop">GamesDirect</a>',
