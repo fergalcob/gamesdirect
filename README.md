@@ -1,7 +1,10 @@
 ![Am-I-Responsive](README/amiresponsive.png)
 
 # Live Link
-[https://www.gamesdirect.shop/store_pages/]([https://gamedb-live.herokuapp.com/catalog/](https://www.gamesdirect.shop/store_pages/))
+[https://www.gamesdirect.shop/store_pages/]((https://www.gamesdirect.shop/store_pages/))
+
+# Alternate Link
+[https://gamesdirect-244b07933989.herokuapp.com/](https://gamesdirect-244b07933989.herokuapp.com/)
 
 ## Table of Contents
 
@@ -25,10 +28,10 @@
 - [Features](#features)
   * [Common Features](#common-features)
   * [Home Page](#home-page)
-  * [Genre, Developers, Publishers Lists](#genre-developers-publishers-lists)
   * [Products Page/Search Results Page](#products-page-search-results)
   * [Game Description Page](#game-description-page)
   * [Orders Page](#orders-page)
+  * [404 Page](#404-page)
 
 - [Colour Palette](#colour-palette)
 - [Typography](#typography)
@@ -337,82 +340,11 @@ The second half of the page is then broken into a Details section which gives a 
 
 The orders page allows users to see any completed or pending orders on the account. By using Stripe webhooks the order status is updated automatically. These orders are then separated into accordion elements to minimize page length. When expanded the order will show the items and quantities that were in the account at the time of payment. If a payment has been completed, there will be an additional set of buttons to expand the activation key details for each purchased product. After the webhook has received a successful payment signal, in addition to updating the order, the stock level for the purchased items will also be updated automatically to prevent excess purchases.
 
-### Reviews & Comments
+#### 404 Page
 
-![Reviews-And-Comments-Desktop](README/reviews_page_desktop.png)
+![404-Desktop](README/error-page-desktop.png)
 
-<details>
-  <summary>Reviews & Comments Mobile</summary>
-  
-  ![Reviews-And-Comments-Mobile](README/reviews_and_comments_mobile.png)
-  
-</details>
-
-This page uses a tabbed display to show any reviews or comments left by a user which can be switched between at will. These tabs show the name along with the link to the game, their rating, comments and title for the content as well. These tables are both set to paginate at 10 items to avoid the page becoming overly long and when on mobile devices the review table collapses to prevent horizontal scrolling.
-
-#### Sign-In, Sign-Up & Password Change Pages
-
-![Forms-Desktop](README/forms_desktop.png)
-
-<details>
-  <summary>Forms Pages Mobile</summary>
-  
-  ![Forms-Pages-Mobile](README/forms_mobile.png)
-  
-</details>
-
-These pages all use a similar design concept and use the same functionality to process the user data. These forms will advise the user of the requirements for the action they wish to take and will be prompted with error messages if they provide incorrect/invalid data. When being processed they use Django's inbuilt authentication functionality to process these requests and work with the User model to update/create the data for the user.
-
-#### Profile Update
-
-Here the user can update certain information from their profile and have it reflected in their profile page.
-
-#### My Collections
-
-![My-Collections-Desktop](README/my_collections_desktop.png)
-
-<details>
-  <summary>My Collections Mobile</summary>
-  
-  ![My-Collections-Mobile](README/my_collections_mobile.png)
-  
-</details>
-
-Here a user can see all the collections they have made for the site and create new lists for sharing among users of the site itself. After creating a collection, the collection will be in draft mode until at least one item is contained within the collection at which point a user can choose to publish this to the site itself for others to view. Once published they will also have the option to unpublish it or to delete it fully from the site itself.
-
-#### Personal Collection
-
-![My-Personal-Collection-Desktop](README/my_personal_collection_desktop.png)
-
-<details>
-  <summary>My Personal Collection Mobile</summary>
-  
-  ![My-Personal-Collection-Mobile](README/my_personal_collection_mobile.png)
-  
-</details>
-
-A user can add games to their own personal collection which is only visible to themselves and the intention is for this to be used by people setting up a backlog or collecting a list of what they own without needing to assign it to a specific collection
-
-#### Error Pages
-
-![403-Desktop](README/403_desktop.png)
-![404-Desktop](README/404_desktop.png)
-
-<details>
-  <summary>403 Page Mobile</summary>
-  
-  ![403-Page-Mobile](README/403_mobile.png)
-  
-</details>
-
-<details>
-  <summary>404 Page Mobile</summary>
-  
-  ![404-Page-Mobile](README/404_mobile.png)
-  
-</details>
-
-A collection of error pages(404, 500, 503) were created for the site and display when the user encounters the specific issue that the error specifies and they are provided with an error image, an explanation of the issue and a link back to the Homepage of the site.
+A simple 404 page has been created for the site notifying users that the page they have requested cannot be found and provides them a direct link to the homepage via the error message or via the standard navbar controls.
 
 
 ### Colour Palette
@@ -560,7 +492,7 @@ The results of all testing performed can be found in the TESTING.md file [here](
 
 [Javascript](https://www.javascript.com/) - Used for some of the interactive content and formatting of certain pages
 
-[AWS](https://aws.amazon.com/) - Used for hosting the media & static files and also for hosting the PostgreSQL database
+[AWS](https://aws.amazon.com/) - Used for hosting the media & static files and also for hosting the PostgreSQL database. Also used for Cloudfront deployment of site via CNAME alias
 
 [PostgreSQL](https://www.postgresql.org/) - Used for the model databases
 
@@ -578,19 +510,15 @@ The results of all testing performed can be found in the TESTING.md file [here](
 
 [Stripe](https://stripe.com/] - Used for handling the checkout functionality of the site
 
+[GoDaddy](https://godaddy.com/) - DNS provider for the domain gamesdirect.shop
+
 ### Libraries & Frameworks
 
 [Bootstrap](https://getbootstrap.com/) - Used for quicker styling of certain elements
 
-[TinyMCE](https://www.tiny.cloud/) - Allows embedding of rich text editor within content allowing users to style their reviews/comments
-
 [jQuery](https://jquery.com/) - Used for running certain Javascript content to handle cart and wishlist functionality
 
 [Boto3](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/quickstart.html) - Used to integrate AWS S3 bucket for content upload and retrieval
-
-[Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) - Django library to assist in the rendering of forms within templates
-
-[Django Widget Tweaks](https://pypi.org/project/django-widget-tweaks/) - Used to extend the options available with regards to form fields within templates in order to add attributes
 
 [Pillow](https://pillow.readthedocs.io/en/stable/) - Python image library used for conversion and assignment of image files
 
@@ -598,15 +526,7 @@ The results of all testing performed can be found in the TESTING.md file [here](
 
 [Django Resized](https://pypi.org/project/django-resized/) - Used to resize images for saving to S3 bucket
 
-[DataTables](https://datatables.net/) - jQuery plugin used to paginate the content in the tabbed pages of the My Reviews & Comments page
-
-[Slick](https://kenwheeler.github.io/slick/) - Slider used for image carousels on home page
-
-[Star Rating](https://plugins.krajee.com/star-rating) - jQuery plugin used for the hoverable star rating option when leaving a reviews/comments
-
-[Django After Response](https://pypi.org/project/django-after-response/) - Used to call certain functions after initial response to reduce load times
-
-[Mock](https://mock.readthedocs.io/en/latest/) - Used for simulating file objects to test FileField forms in the tests.py file
+[SplideJS](https://splidejs.com/) - Used to form the multi-row carousel for use in the individual product pages
 
 ### Resources
 
@@ -625,6 +545,8 @@ The results of all testing performed can be found in the TESTING.md file [here](
 [PyPI](https://pypi.org/) - Used for finding specific Python/Django libraries to meet the project needs
 
 [Django Project Documentation](https://docs.djangoproject.com/en/4.2/) - Useful for clarification on certain aspects of Django commands
+
+[GIMP](https://www.gimp.org/) - Used to create the banner seen on the home page
 
 ## Future Improvements
 
