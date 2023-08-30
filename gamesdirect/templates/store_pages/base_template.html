@@ -52,7 +52,7 @@
 <script
 			  src="https://code.jquery.com/jquery-3.7.0.min.js"
 			  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
-			  crossorigin="anonymous" defer></script>
+			  crossorigin="anonymous"></script>
 <script src="{% static 'js/wishlist.js' %}" defer></script>
 <script src="{% static 'js/add_to_cart.js' %}" defer></script>
 <script src="{% static 'js/remove_from_cart.js' %}" defer></script>
@@ -67,7 +67,7 @@
 {% endblock %}
 {% if messages %}
 <script>
-$(window).on('load', function(){
+  $(document).ready(function(){
       $("#myModal").modal('show');
   });
 </script>
