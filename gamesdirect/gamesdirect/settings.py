@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['https://www.gamesdirect.shop']
+CSRF_TRUSTED_ORIGINS = ['https://www.gamesdirect.shop', 'http://d3abwktql0jbq4.cloudfront.net']
 
 # Application definition
 
