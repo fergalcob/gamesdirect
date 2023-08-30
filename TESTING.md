@@ -1,4 +1,4 @@
-- [Manual Testing](#manual-testing)
+![image](https://github.com/fergalcob/gamesdirect/assets/111295181/ea38b324-14c8-457c-9b80-1fa72bba1121)- [Manual Testing](#manual-testing)
   * [Initial Project Creation](#initial-project-creation)
   * [User Management](#user-management)
   * [Project Data](#project-data)
@@ -121,6 +121,59 @@ All pages were run through the W3C validator to ensure there were no major issue
   <summary>Index Validation</summary>
   
   ![Index-Validation](TESTING/index-validation.png)
+  
+</details>
+
+<details>
+  <summary>Platforms Page Validation</summary>
+  
+  ![Platforms-Page-Validation](TESTING/platform-page-validation.png)
+  
+</details>
+
+<details>
+  <summary>Change Details Page Validation</summary>
+  
+  ![Change-Details-Page-Validation](TESTING/change-details-page-validation.png)
+  
+</details>
+
+<details>
+  <summary>Registration Page Validation</summary>
+  
+  ![Registration-Page-Validation](TESTING/registration-validation.png)
+  
+</details>
+
+The one error on the pages above is due to the subscription sign-up form and the email change form from AllAuth both using the same id_email ID which would also occur with the forgotten password page due to the email address requirement
+
+<details>
+  <summary>Product Page Validation</summary>
+  
+  ![Product-Page-Validation](TESTING/product-page-validation.png)
+  
+</details>
+
+The error regarding the src attribute missing from the Youtube embeds on the Product Page can be attributed to the guide [here](https://isotropic.co/how-to-defer-parsing-of-javascript-for-youtube-embeds/). In order to reduce the blocking time that the embed cause when there are a large number of videos, the guide uses a Javascript function to defer the initial loading of the videos to improve initial page load times
+
+<details>
+  <summary>Wishlist Page Validation</summary>
+  
+  ![Wishlist-Page-Validation](TESTING/wishlist-validation.png)
+  
+</details>
+
+<details>
+  <summary>Orders Page Validation</summary>
+  
+  ![Orders-Page-Validation](TESTING/orders-validation.png)
+  
+</details>
+
+<details>
+  <summary>Sign In Page Validation</summary>
+  
+  ![Sign-In-Page-Validation](TESTING/sign-in-validation.png)
   
 </details>
 
