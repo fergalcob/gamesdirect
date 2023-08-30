@@ -22,13 +22,13 @@
     <ul class="splide__list">
         {% if product_videos %}
         {% for videos in product_videos %}
-        <li class="splide__slide"><iframe src="" data-src="https://www.youtube.com/embed/{{ videos.video_id }}" allowfullscreen class="w-100 h-100"></iframe></li>
+        <li class="splide__slide"><iframe src="" data-src="https://www.youtube.com/embed/{{ videos.video_id }}" style="border:0;" allowfullscreen class="w-100 h-100"></iframe></li>
         {% endfor %}
         {% endif %}
         {% if product_screenshots %}
         {% for screenshots in product_screenshots %}
         <li class="splide__slide"> <picture>       <source media="(max-width:768px)" srcset="{{ screenshots.screen_mobile_resized.url }}">
-          <img src="{{ screenshots.screen_large_resized.url }}" class="card-img-top"  alt="Cover of {{ product.name }}"></picture> </li>
+          <img src="{{ screenshots.screen_large_resized.url }}" class="card-img-top"  alt="Screens from {{ product.name }}"></picture> </li>
 {% endfor %}
         {% endif %}
 </ul>
@@ -46,7 +46,7 @@
             {% if product_screenshots %}
             {% for screenshots in product_screenshots %}
             <li class="splide__slide"><picture><source media="(max-width:768px)" srcset="{{ screenshots.screen_mobile_resized.url }}">
-              <img src="{{ screenshots.screen_large_resized.url }}" class="card-img-top"  alt="Cover of {{ product.name }}"></picture></li>{% endfor %}
+              <img src="{{ screenshots.screen_large_resized.url }}" class="card-img-top"  alt="Screens from {{ product.name }}"></picture></li>{% endfor %}
             {% endif %}
 
 </ul>
@@ -58,7 +58,7 @@
     <div class="col-12 ">
     <div class="image-box bg-image">
       <picture><source media="(max-width:768px)" srcset="{{ product_cover.cover_mobile_resized.url }}">
-        <img src="{{ product_cover.screen_large_resized.url }}" class="card-img-top"  alt="Cover of {{ product.name }}"></picture>  {% if product.sale_discount > 0 %}
+        <img src="{{ product_cover.cover_large_resized.url }}" class="card-img-top"  alt="Cover of {{ product.name }}"></picture>  {% if product.sale_discount > 0 %}
   <div class="position-absolute top-0 end-0 text-light w-5" style="background-color: rgba(220, 20, 60)">
   <p class="p-2 m-1 text-align-right sale-amount">-{{ product.sale_discount }}%</p></div>
   {% endif %}
