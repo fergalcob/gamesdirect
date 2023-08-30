@@ -192,7 +192,7 @@ The CSS was run through the W3C CSS validator to ensure no errors were found and
 <details>
   <summary>CSS Validation</summary>
   
-  ![CSS-Validation](TESTING/css_validation.png)
+  ![CSS-Validation](TESTING/css-validation.png)
   
 </details>
 
