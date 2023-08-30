@@ -35,12 +35,12 @@
             {% else %}
             <i class="fa-regular fa-heart wishlist me-3 game-{{ sale_items.id }}" data-id="{{ sale_items.id }}" data-game-id="{{ sale_items.game_id}}" data-platform="{{ sale_items.platform }}"></i>              {% endif %}
          
-            {% if sale_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart cart-button" data-product-id="{{ sale_items.id }}" data-product-platform="{{ sale_items.platform }}">Add To Cart</button>{% endif %}
+            {% if sale_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary out-of-stock" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart cart-button" data-product-id="{{ sale_items.id }}" data-product-platform="{{ sale_items.platform }}">Add To Cart</button>{% endif %}
           {% else %}
           <i  class="fa-regular fa-heart wishlist-login me-3" data-id="{{ sale_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
       </i>
     
-                  <button type="button" class="btn btn-secondary add-to-cart" data-id="{{ sale_items.game_id }}">Add To Cart</button>
+                  <button type="button" class="btn btn-secondary" data-id="{{ sale_items.game_id }}" data-bs-target="#exampleModalCenter">Add To Cart</button>
     
       
           {% endif %}
@@ -81,12 +81,12 @@
           <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3 games-{{ new_items.id }}" data-id="{{ new_items.id }}" data-game-id="{{ new_items.game_id }}" data-platform="{{ new_items.platform }}"></i>             
           {% else %}
           <i class="fa-regular fa-heart wishlist me-3 games-{{ new_items.id }}" data-id="{{ new_items.id }}" data-game-id="{{ new_items.game_id }}" data-platform="{{ new_items.platform }}"></i>              {% endif %}
-          {% if new_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart cart-button" data-product-id="{{ new_items.id }}" data-product-platform="{{ new_items.platform }}">Add To Cart</button>{% endif %}
+          {% if new_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary out-of-stock" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart cart-button" data-product-id="{{ new_items.id }}" data-product-platform="{{ new_items.platform }}">Add To Cart</button>{% endif %}
           {% else %}
           <i class="fa-regular fa-heart wishlist-login me-3 games-{{ new_items.id }}" data-id="{{ new_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
       </i>
     
-                  <button type="button" class="btn btn-secondary add-to-cart" id="{{ new_items.game_id }}">Add To Cart</button>
+                  <button type="button" class="btn btn-secondary" id="{{ new_items.game_id }}" data-bs-target="#exampleModalCenter">Add To Cart</button>
     
       
           {% endif %}
@@ -131,7 +131,7 @@
           <i  class="fa-regular fa-heart wishlist-login me-3 games-{{ top_items.id }}" data-id="{{ top_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
       </i>
     
-                  <button type="button" class="btn btn-secondary add-to-cart games-{{ top_items.id }}" data-id="{{ top_items.game_id }}">Add To Cart</button>
+                  <button type="button" class="btn btn-secondary games-{{ top_items.id }}" data-id="{{ top_items.game_id }}" data-bs-target="#exampleModalCenter">Add To Cart</button>
     
       
           {% endif %}
@@ -160,7 +160,7 @@
                   
                 </div>
                 <div class="modal-body">
-                  <p>Please sign in to add to your wishlist.</p>
+                  <p>Please sign in to add to your wishlist or purchase items.</p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
