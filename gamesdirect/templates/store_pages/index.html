@@ -31,16 +31,16 @@
 
             {% check_wishlist user sale_items.game_id sale_items.platform as wishlist_evaluation %}
             {% if wishlist_evaluation %}
-            <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3" id="{{ sale_items.id }}" data-game-id="{{ sale_items.game_id}}" data-platform="{{ sale_items.platform }}"></i>             
+            <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3 game-{{ sale_items.id }}" data-id="{{ sale_items.id }}" data-game-id="{{ sale_items.game_id}}" data-platform="{{ sale_items.platform }}"></i>             
             {% else %}
-            <i class="fa-regular fa-heart wishlist me-3" id="{{ sale_items.id }}" data-game-id="{{ sale_items.game_id}}" data-platform="{{ sale_items.platform }}"></i>              {% endif %}
+            <i class="fa-regular fa-heart wishlist me-3 game-{{ sale_items.id }}" data-id="{{ sale_items.id }}" data-game-id="{{ sale_items.game_id}}" data-platform="{{ sale_items.platform }}"></i>              {% endif %}
          
             {% if sale_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart" id="cart-button" data-product-id="{{ sale_items.id }}" data-product-platform="{{ sale_items.platform }}">Add To Cart</button>{% endif %}
           {% else %}
-          <i type="button" class="fa-regular fa-heart wishlist-login me-3" id="{{ sale_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+          <i type="button" class="fa-regular fa-heart wishlist-login me-3" data-id="{{ sale_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
       </i>
     
-                  <button type="button" class="btn btn-secondary add-to-cart" id="{{ sale_items.game_id }}">Add To Cart</button>
+                  <button type="button" class="btn btn-secondary add-to-cart" data-id="{{ sale_items.game_id }}">Add To Cart</button>
     
       
           {% endif %}
@@ -52,7 +52,7 @@
     <p><a href="{% url 'products' sale_items.slug %}?platform={{ sale_items.platform }}">{{ sale_items.name }}({% if sale_items.platform is 6 %}PC{% elif sale_items.platform is 130 %}Nintendo Switch{% elif sale_items.platform is 167 %}Playstation 5{% elif sale_items.platform is 169 %}Xbox Series X|S{% endif %})</a></p>
     <div class="stock row"><p>{% if sale_items.keys_in_stock|length > 5 %}<span class="float-end">In Stock</span>{% elif sale_items.keys_in_stock|length > 0 %}<span class="text-danger float-end">Hurry! Only {{ sale_items.keys_in_stock| length }} left in stock!</span>{% else %}<span class="float-end">Out Of Stock</span>{% endif %}</p></div>
  
-    <div class="price-info">{% if sale_items.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ sale_items.base_price }}</span><span class="all-prices float-end">{{ sale_items.sale_price }}</span></p>{% else %}<span class="all-prices float-end">{{ sale_items.base_price }}</span></p>{% endif %}</div>
+    <div class="price-info">{% if sale_items.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ sale_items.base_price }}</span><span class="all-prices float-end">{{ sale_items.sale_price }}</span></p>{% else %}<p><span class="all-prices float-end">{{ sale_items.base_price }}</span></p>{% endif %}</div>
     </div>
     </div>
     </div>
@@ -152,7 +152,7 @@
   {% if not user.is_authenticated %}
 
 
-        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
