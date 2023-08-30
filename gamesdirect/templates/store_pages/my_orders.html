@@ -17,14 +17,14 @@
             <table class="table table-striped">
                 <tr><th colspan="2" class="text-center">Item Details</th><th>Quantity</th><th>Price</th></tr>
                 {% for items in orders.order_items.current_cart %}
-                <tr><td class="order-thumbnail"><img src="{{ items.item_thumbnail }}"></td><td>{{ items.item_name }} ({{ items.item_console }})</td><td>{{ items.item_quantity }}</td><td>{{ items.item_price }}</td></tr>
+                <tr><td class="order-thumbnail"><img src="{{ items.item_thumbnail }}" alt="Cover of {{ items.item_name }}"></td><td>{{ items.item_name }} ({{ items.item_console }})</td><td>{{ items.item_quantity }}</td><td>{{ items.item_price }}</td></tr>
                 {% if items.activation_keys %}
                 {% for keys in items.activation_keys %}
                 <tr><td colspan="4">
-                <div class="accordion" id="accordionKeys{{ orders.order_number }}-key{{ forloop.counter }}">
+                <div class="accordion" id="accordionKeys{{ orders.order_number }}-game-{{ items.item_id }}-key{{ forloop.counter }}">
                   <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading{{ orders.order_number }}-key{{ forloop.counter }}">
-                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ orders.order_number }}-game{{ items.item_id}}-key{{ forloop.counter }}" aria-expanded="true" aria-controls="collapse{{ orders.order_number }}-key{{ forloop.counter }}">
+                    <h2 class="accordion-header" id="heading{{ orders.order_number }}-game-{{ items.item_id }}-key{{ forloop.counter }}">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ orders.order_number }}-game{{ items.item_id}}-key{{ forloop.counter }}" aria-expanded="true">
                         Show Key #{{ forloop.counter }}
                       </button>
                     </h2>
