@@ -40,7 +40,7 @@
           <i  class="fa-regular fa-heart wishlist-login me-3" data-id="{{ sale_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
       </i>
     
-                  <button type="button" class="btn btn-secondary" data-id="{{ sale_items.game_id }}" data-bs-target="#exampleModalCenter">Add To Cart</button>
+                  <button type="button" class="btn btn-secondary" data-id="{{ sale_items.game_id }}" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Add To Cart</button>
     
       
           {% endif %}
@@ -86,7 +86,7 @@
           <i class="fa-regular fa-heart wishlist-login me-3 games-{{ new_items.id }}" data-id="{{ new_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
       </i>
     
-                  <button type="button" class="btn btn-secondary" id="{{ new_items.game_id }}" data-bs-target="#exampleModalCenter">Add To Cart</button>
+                  <button type="button" class="btn btn-secondary" id="{{ new_items.game_id }}" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Add To Cart</button>
     
       
           {% endif %}
@@ -131,7 +131,7 @@
           <i  class="fa-regular fa-heart wishlist-login me-3 games-{{ top_items.id }}" data-id="{{ top_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
       </i>
     
-                  <button type="button" class="btn btn-secondary games-{{ top_items.id }}" data-id="{{ top_items.game_id }}" data-bs-target="#exampleModalCenter">Add To Cart</button>
+                  <button type="button" class="btn btn-secondary games-{{ top_items.id }}" data-id="{{ top_items.game_id }}" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Add To Cart</button>
     
       
           {% endif %}
