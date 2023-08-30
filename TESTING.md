@@ -184,6 +184,7 @@ The error regarding the src attribute missing from the Youtube embeds on the Pro
   ![404-page-Validation](TESTING/error_validation.png)
   
 </details>
+
 ### CSS Validation
 
 The CSS was run through the W3C CSS validator to ensure no errors were found and the results are as follows
