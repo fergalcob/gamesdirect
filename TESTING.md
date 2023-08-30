@@ -1,4 +1,4 @@
-![image](https://github.com/fergalcob/gamesdirect/assets/111295181/ea38b324-14c8-457c-9b80-1fa72bba1121)- [Manual Testing](#manual-testing)
+ - [Manual Testing](#manual-testing)
   * [Initial Project Creation](#initial-project-creation)
   * [User Management](#user-management)
   * [Project Data](#project-data)
