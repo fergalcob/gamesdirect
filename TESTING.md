@@ -7,9 +7,9 @@
   * [Cart Functionality](#cart-functionality)
   * [Checkout Functionality](#checkout-functionality)
  - [Code Validation](#code-validation)
-  * [W3C Validation](#w3c-validation)
-  * [CSS Validation](#css-validation)
-  * [PEP8 Testing](#pep8-testing)
+   * [W3C Validation](#w3c-validation)
+   * [CSS Validation](#css-validation)
+   * [PEP8 Testing](#pep8-testing)
 - [Devices Tested](#devices-tested)
 - [Bugs & Known Issues](#bugs--known-issues)
     
@@ -105,6 +105,24 @@ Payment Sucess | On payment success, keys should be retrieved from purchased ite
 Stock Updates | Keys added to successful orders are removed from original items to prevent duplicates being provided | As Expected | Pass
 Out Of Stock | Games displayed on site disable purchase button when no keys are in stock | As Expected | Pass
 Low Stock | If a product has 5 or less keys in stock, a message is displayed on the product page and all other game pages | As Expected | Pass
+
+### Misc
+Feature Tested | Expected Result | Actual Result | Pass/Fail
+---------------|-----------------|---------------|----------
+404 Page | When user accesses invalid URL, they are redirected to the 404 page | Partial Success | See Known Issues for further details
+
+## Validation
+
+### W3C Validation
+
+All pages were run through the W3C validator to ensure there were no major issues.
+
+<details>
+  <summary>Index Validation</summary>
+  
+  ![Index-Validation](TESTING/index-validation.png)
+  
+</details>
 
 ### CSS Validation
 
