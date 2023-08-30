@@ -10,6 +10,7 @@
    * [W3C Validation](#w3c-validation)
    * [CSS Validation](#css-validation)
    * [PEP8 Testing](#pep8-testing)
+   * [Lighthouse Testing](#lighthouse-testing)
 - [Devices Tested](#devices-tested)
 - [Bugs & Known Issues](#bugs--known-issues)
     
@@ -219,7 +220,57 @@ Code for Checkout and Store Pages views were run through CI's PEP8 tester to ens
   
 </details>
 
+### Lighthouse Testing
 
+<details>
+  <summary>Change Details Lighthouse Results </summary>
+  
+  ![Change-Details-Lighthouse](TESTING/change-details-lighthouse.png)
+  
+</details>
+
+<details>
+  <summary>Home Page Lighthouse Results </summary>
+  
+  ![Home-Page-Lighthouse](TESTING/home-lighthouse.png)
+  
+</details>
+
+<details>
+  <summary>Platforms Page Lighthouse Results </summary>
+  
+  ![Platforms-Page-Lighthouse](TESTING/platform-page-lighthouse.png)
+  
+</details>
+
+<details>
+  <summary>Product Page Lighthouse Results </summary>
+  
+  ![Product-Page-Lighthouse](TESTING/product-page-lighthouse.png)
+  
+</details>
+
+  <summary>Orders Page Lighthouse Results </summary>
+  
+  ![Orders-Page-Lighthouse](TESTING/orders-lighthouse.png)
+  
+</details>
+
+</details>
+
+  <summary>Wishlist Page Lighthouse Results </summary>
+  
+  ![Wishlist-Page-Lighthouse](TESTING/wishlist-lighthouse.png)
+  
+</details>
+
+</details>
+
+  <summary>Registration Page Lighthouse Results </summary>
+  
+  ![Registration-Page-Lighthouse](TESTING/registration-lighthouse.png)
+  
+</details>
 
 ## Known Issues
 
