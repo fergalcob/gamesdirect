@@ -23,10 +23,10 @@
 </div>
 <div class="col-3 offset-2">
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Filter By:
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
 {% for genre in genres %}
     <a class="dropdown-item" href="{% url 'games' %}?{% if 'genres' in request.GET %}{{ referrer }}={{ genre.slug }}{% else %}{{ referrer }}={{ chosen_selector.slug }}&filter={{ genre.slug }}{% endif %}{% if 'sort' in request.GET %}&sort={{ request.GET.sort }}&dir={{ request.GET.dir }}{% endif %}">{{ genre.name }}</a>
 {% endfor %}
@@ -92,7 +92,7 @@
 </div>
 
 </div>
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
