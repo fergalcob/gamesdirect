@@ -51,15 +51,15 @@
     <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">   {% if user.is_authenticated %}
       {% check_wishlist user games.game_id games.platform as wishlist_evaluation %}
       {% if wishlist_evaluation %}
-      <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3" id="{{ games.id }}" data-game-id="{{ games.game_id }}"  data-platform="{{ games.platform }}"></i>              
+      <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3 games-{{ games.id }}" data-id="{{ games.id }}" data-game-id="{{ games.game_id }}"  data-platform="{{ games.platform }}"></i>              
       {% else %}
-      <i class="fa-regular fa-heart wishlist me-3" id="{{ games.id }}" data-game-id="{{ games.game_id }}"  data-platform="{{ games.platform }}"></i>              {% endif %}
-      {% if games.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart" id="cart-button" data-product-id="{{ games.id }}" data-product-platform="{{ games.platform }}">Add To Cart</button>{% endif %}
+      <i class="fa-regular fa-heart wishlist me-3 games-{{ games.id }}" data-id="{{ games.id }}" data-game-id="{{ games.game_id }}"  data-platform="{{ games.platform }}"></i>              {% endif %}
+      {% if games.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart cart-button" data-product-id="{{ games.id }}" data-product-platform="{{ games.platform }}">Add To Cart</button>{% endif %}
       {% else %}
-      <i type="button" class="fa-regular fa-heart wishlist-login me-3" id="{{ games.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+      <i type="button" class="fa-regular fa-heart wishlist-login me-3 games-{{ games.id }}" data-id="{{ games.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
   </i>
 
-              <button type="button" class="btn btn-secondary add-to-cart" id="{{ games.game_id }}">Add To Cart</button>
+              <button type="button" class="btn btn-secondary add-to-cart games-{{ games.id }}" data-id="{{ games.game_id }}">Add To Cart</button>
 
   
       {% endif %}
@@ -70,7 +70,7 @@
     <div class="card-body">
 <p><a href="{% url 'products' games.slug %}?platform={{ games.platform }}">{{ games.name }}</a></p>
 <div class="stock row"><p>{% if games.keys_in_stock|length > 5 %}<span class="float-end">In Stock</span>{% elif games.keys_in_stock|length > 0 %}<span class="text-danger float-end">Hurry! Only {{ games.keys_in_stock| length }} left in stock!</span>{% else %}<span class="float-end">Out Of Stock</span>{% endif %}</p></div>
-<div class="price-info">{% if games.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ games.base_price }}</span><span class="all-prices float-end">{{ games.sale_price }}</span></p>{% else %}<span class="all-prices float-end">{{ games.base_price }}</span></p>{% endif %}</div>
+<div class="price-info">{% if games.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ games.base_price }}</span><span class="all-prices float-end">{{ games.sale_price }}</span></p>{% else %}<p><span class="all-prices float-end">{{ games.base_price }}</span></p>{% endif %}</div>
 </div>
 </div>
 </div>

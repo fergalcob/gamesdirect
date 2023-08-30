@@ -142,7 +142,7 @@
         <div class="card-body">
     <p><a href="{% url 'products' top_items.slug %}?platform={{ top_items.platform }}">{{ top_items.name }}({% if top_items.platform is 6 %}PC{% elif top_items.platform is 130 %}Nintendo Switch{% elif top_items.platform is 167 %}Playstation 5{% elif top_items.platform is 169 %}Xbox Series X|S{% endif %})</a></p>
     <div class="stock row"><p>{% if top_items.keys_in_stock|length > 5 %}<span class="float-end">In Stock</span>{% elif top_items.keys_in_stock|length > 0 %}<span class="text-danger float-end">Hurry! Only {{ top_items.keys_in_stock| length }} left in stock!</span>{% else %}<span class="float-end">Out Of Stock</span>{% endif %}</p></div>
-    <div class="price-info">{% if top_items.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ top_items.base_price }}</span><span class="all-prices float-end">{{ top_items.sale_price }}</span></p>{% else %}<span class="all-prices float-end">{{ top_items.base_price }}</span></p>{% endif %}</div>
+    <div class="price-info">{% if top_items.sale_discount > 0 %}<p><span class="text-decoration-line-through text-danger all-prices">{{ top_items.base_price }}</span><span class="all-prices float-end">{{ top_items.sale_price }}</span></p>{% else %}<p><span class="all-prices float-end">{{ top_items.base_price }}</span></p>{% endif %}</div>
     </div>
     </div>
     </div>
