@@ -14,20 +14,19 @@ from mailchimp_transactional.api_client import ApiClientError
 import logging
 from store_pages.views import index
 
-mailchimp = mailchimp_transactional.Client(
-    api_key=settings.MAILCHIMP_TRANSACTIONAL_API,
-)
+# Initialize Mailchimp client and logger
+mailchimp = mailchimp_transactional.Client(api_key=settings.MAILCHIMP_TRANSACTIONAL_API)
 logger = logging.getLogger(__name__)
 
-
-# Create your views here.
+# View function to retrieve Stripe configuration
 @csrf_exempt
 def stripe_config(request):
     if request.method == "GET":
+        # Prepare and return Stripe configuration data
         stripe_config = {"publicKey": settings.STRIPE_PUBLISHABLE_KEY}
         return JsonResponse(stripe_config, safe=False)
 
-
+# View function to create a checkout session for Stripe payment
 @csrf_exempt
 def create_checkout_session(request):
     if request.method == "GET":
@@ -43,6 +42,7 @@ def create_checkout_session(request):
             order_number=order_number_generator
         )
         if created is True:
+            # Create a new order if it doesn't exist
             new_order.owner_id = user_cart.owner
             new_order.order_items = user_cart.cart_items
             new_order.total_price = user_cart.total_price
@@ -50,10 +50,10 @@ def create_checkout_session(request):
             new_order.save()
 
         try:
+            # Create a Stripe checkout session
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=new_order.order_number,
-                success_url=domain_url
-                + "success?session_id={CHECKOUT_SESSION_ID}",
+                success_url=domain_url + "success?session_id={CHECKOUT_SESSION_ID}",
                 cancel_url=domain_url + "cancelled/",
                 payment_method_types=["card"],
                 mode="payment",
@@ -61,16 +61,12 @@ def create_checkout_session(request):
                     {
                         "price_data": {
                             "product_data": {
-                                "name": "Order #"
-                                + str(new_order.order_number),
+                                "name": "Order #" + str(new_order.order_number),
                                 "description": "Payment to GamesDirect.Shop"
-                                " for Order #"
-                                + str(new_order.order_number)
-                                + ".",
+                                " for Order #" + str(new_order.order_number) + ".",
                             },
                             "currency": "eur",
-                            "unit_amount_decimal": user_cart.total_price.amount
-                            * 100,
+                            "unit_amount_decimal": user_cart.total_price.amount * 100,
                         },
                         "quantity": 1,
                     }
@@ -81,7 +77,7 @@ def create_checkout_session(request):
         except Exception as e:
             return JsonResponse({"error": str(e)})
 
-
+# View function to handle Stripe webhook events
 @csrf_exempt
 def stripe_webhook(request):
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -91,9 +87,8 @@ def stripe_webhook(request):
     event = None
 
     try:
-        event = stripe.Webhook.construct_event(
-            payload, sig_header, endpoint_secret
-        )
+        # Verify and parse the webhook event
+        event = stripe.Webhook.construct_event(payload, sig_header, endpoint_secret)
     except ValueError as e:
         # Invalid payload
         return HttpResponse(status=400)
@@ -101,8 +96,9 @@ def stripe_webhook(request):
         # Invalid signature
         return HttpResponse(status=400)
 
-    # Handle the checkout.session.completed event
+    # Handle different types of Stripe webhook events
     if event["type"] == "checkout.session.completed":
+        # Handle successful checkout
         status_update = Orders.objects.get(
             order_number=event["data"]["object"]["client_reference_id"]
         )
@@ -155,6 +151,7 @@ def stripe_webhook(request):
             )
 
     elif event["type"] == "checkout.session.async_payment_succeeded":
+        # Handle async payment success
         status_update = Orders.objects.get(
             order_number=event["data"]["object"]["client_reference_id"]
         )
@@ -205,7 +202,8 @@ def stripe_webhook(request):
                     "error": error.text,
                 }
             )
-    elif event["type"] == " checkout.session.async_payment_failed":
+    elif event["type"] == "checkout.session.async_payment_failed":
+        # Handle async payment failure
         status_update = Orders.objects.get(
             order_number=event["data"]["object"]["client_reference_id"]
         )
@@ -252,16 +250,17 @@ def stripe_webhook(request):
     return HttpResponse(status=200)
 
 
+# View function for successful payment page
 def SuccessView(request):
     messages.add_message(
         request,
         messages.INFO,
-        "Your payment was successful and your items will be"
-        " delivered shortly.",
+        "Your payment was successful and your items will be delivered shortly.",
     )
     return redirect("index")
 
 
+# View function for cancelled payment page
 def CancelledView(request):
     messages.add_message(
         request, messages.INFO, "You have cancelled your payment."
