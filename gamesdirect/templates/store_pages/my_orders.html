@@ -28,7 +28,7 @@
                         Show Key #{{ forloop.counter }}
                       </button>
                     </h2>
-                    <div id="collapse{{ orders.order_number }}-game{{ items.item_id}}-key{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ orders.order_number }}-key{{ forloop.counter }}" data-bs-parent="#accordionKeys{{ orders.order_number }}-key{{ forloop.counter }}">
+                    <div id="collapse{{ orders.order_number }}-game{{ items.item_id}}-key{{ forloop.counter }}" class="accordion-collapse collapse" aria-labelledby="heading{{ orders.order_number }}-game-{{ items.item_id }}-key{{ forloop.counter }}" data-bs-parent="#accordionKeys{{ orders.order_number }}-key{{ forloop.counter }}">
                       <div class="accordion-body">
                         <strong>{{ keys }}</strong>
                       </div>
