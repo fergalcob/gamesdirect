@@ -214,13 +214,6 @@ Code for Checkout and Store Pages views were run through CI's PEP8 tester to ens
   
 </details>
 
-<details>
-  <summary>Store Pages PEP8 Validation</summary>
-  
-  ![Store-Pages-PEP8-Validation](TESTING/store-pages-lint.png)
-  
-</details>
-
 ### Lighthouse Testing
 
 <details>
