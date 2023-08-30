@@ -111,6 +111,9 @@ Low Stock | If a product has 5 or less keys in stock, a message is displayed on 
 Feature Tested | Expected Result | Actual Result | Pass/Fail
 ---------------|-----------------|---------------|----------
 404 Page | When user accesses invalid URL, they are redirected to the 404 page | Partial Success | See Known Issues for further details
+Cloudfront Deployment | User is able to reach heroku app via Cloudfront URL | As expected | Pass
+Cloudfront Traffic | All necessary cookies and headers are being passed correctly to prevent CSRF errors | As expected | Pass
+Alias Domain | After attachment to Cloudfront deployment ensure that the site can correctly be reached through gamesdirect.shop URL | As Expected | Pass
 
 ## Validation
 
