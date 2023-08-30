@@ -1,4 +1,4 @@
-![image](https://github.com/fergalcob/gamesdirect/assets/111295181/ea38b324-14c8-457c-9b80-1fa72bba1121)- [Manual Testing](#manual-testing)
+ - [Manual Testing](#manual-testing)
   * [Initial Project Creation](#initial-project-creation)
   * [User Management](#user-management)
   * [Project Data](#project-data)
@@ -177,6 +177,12 @@ The error regarding the src attribute missing from the Youtube embeds on the Pro
   
 </details>
 
+<details>
+  <summary>404 Page Validation</summary>
+  
+  ![404-page-Validation](TESTING/error_validation.png)
+  
+</details>
 ### CSS Validation
 
 The CSS was run through the W3C CSS validator to ensure no errors were found and the results are as follows
@@ -205,6 +211,14 @@ Code for Checkout and Store Pages views were run through CI's PEP8 tester to ens
   ![Store-Pages-PEP8-Validation](TESTING/store-pages-lint.png)
   
 </details>
+
+<details>
+  <summary>Store Pages PEP8 Validation</summary>
+  
+  ![Store-Pages-PEP8-Validation](TESTING/store-pages-lint.png)
+  
+</details>
+
 
 
 ## Known Issues
