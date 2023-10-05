@@ -289,5 +289,6 @@ Code for Checkout and Store Pages views were run through CI's PEP8 tester to ens
 
 * Removed visible secret key from Git history and generated new key, key hidden in environmental variable
 * Updated Mailchimp URL to redirect to main site after email confirmation to prevent 404 error
+* Updated Cloudfront header policy to allow referrer as this was causing 500 error after entering email address into sign-up form instead of returning to previous page due to Cloudfront initially stripping this from the header
 
 
