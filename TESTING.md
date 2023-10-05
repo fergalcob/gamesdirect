@@ -13,6 +13,7 @@
    * [Lighthouse Testing](#lighthouse-testing)
 - [Devices Tested](#devices-tested)
 - [Bugs & Known Issues](#bugs--known-issues)
+- [Additional Updates](#additional-updates)
     
  
 
@@ -283,5 +284,10 @@ Code for Checkout and Store Pages views were run through CI's PEP8 tester to ens
 
 * One bug is related to the DNS forwarding, as the CNAME is set up for www.gamesdirect.shop and the domain gamesdirect.shop is being forwarded to the subdomain, if you receive a 404 page by going via gamesdirect.shop/non-existant for example, a generic 404 page is shown in place of the correct gamesdirect 404
 * One issue related to the wishlist is that if a user removes the last remaining item on their wishlist while on the wishlist page, the message reporting that they do not have any items on their wishlist is not rendered until the next load of the page
+
+### Additional Updates
+
+* Removed visible secret key from Git history and generated new key, key hidden in environmental variable
+* Updated Mailchimp URL to redirect to main site after email confirmation to prevent 404 error
 
 
