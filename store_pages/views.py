@@ -4,7 +4,7 @@ import pytz
 import logging
 import random
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.core import serializers
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Prefetch
@@ -586,6 +586,8 @@ def games(request):
         print(search_query)
         # Query games based on search query
         game_list = Game.objects.filter(name__icontains=search_query)
+    else:
+        raise Http404
 
     # Pagination handling
     page_number = request.GET.get("page")
