@@ -836,13 +836,13 @@ def subscribe_view(request):
                     " Please verify via the link sent to "
                     + form_email,
                 )
-                return redirect('.')
+                return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
             except ApiClientError as error:
                 logger.error(f"An exception occurred: {error.text}")
-                return redirect('.')
+                return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
-    return redirect('.')
+    return HttpResponseRedirect(request.META["HTTP_REFERER"])
 
 
 # View function for displaying user's order history
