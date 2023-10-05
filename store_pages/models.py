@@ -18,6 +18,8 @@ class Game(models.Model):
 	sale_discount = models.IntegerField(blank=True, default=0)
 	sale_price = MoneyField(decimal_places=2, max_digits=6,default=0, default_currency="EUR")
 	keys_in_stock = ArrayField(models.TextField(max_length=500,null=True, blank=True), null=True, blank=True, default=list)
+	def __str__(self):
+		return self.name
 
 	class Meta:
 		unique_together = ('game_id','platform')
