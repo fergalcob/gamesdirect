@@ -18,6 +18,7 @@ class Game(models.Model):
 	sale_discount = models.IntegerField(blank=True, default=0)
 	sale_price = MoneyField(decimal_places=2, max_digits=6,default=0, default_currency="EUR")
 	keys_in_stock = ArrayField(models.TextField(max_length=500,null=True, blank=True), null=True, blank=True, default=list)
+	
 	def __str__(self):
 		return self.name
 
@@ -32,6 +33,9 @@ class Videos(models.Model):
 	videos_id = models.IntegerField(primary_key=True)
 	video_id = models.CharField(max_length=100, null=True, blank=True)
 	game_ids = models.ManyToManyField(Game)
+
+	def __str__(self):
+		return f'Video ID: {self.videos_id}'
 	
 class Screenshots(models.Model):
 	screenshots_id = models.IntegerField(primary_key=True)
@@ -41,6 +45,9 @@ class Screenshots(models.Model):
 	screen_large_resized = ResizedImageField(size=[400, 500],quality=90, upload_to='media/', blank=True, null=True)
 	screen_thumb_resized = ResizedImageField(size=[150, 150],quality=90, upload_to='media/', blank=True, null=True)
 	screen_mobile_resized =  ResizedImageField(size=[150, 200],quality=90, upload_to='media/', blank=True, null=True)
+
+	def __str__(self):
+		return f'Screenshot ID: {self.screenshots_id}'
 	
 class Cover(models.Model):
 	cover_id = models.IntegerField(primary_key=True)
@@ -51,10 +58,16 @@ class Cover(models.Model):
 	cover_thumb_resized = ResizedImageField(size=[150, 150],quality=90, upload_to='media/', blank=True, null=True)
 	cover_mobile_resized =  ResizedImageField(size=[150, 200],quality=90, upload_to='media/', blank=True, null=True)
 
+	def __str__(self):
+		return f'Cover ID: {self.cover_id}'
+	
 class Company(models.Model):
 	company_id = models.IntegerField(primary_key=True)
 	name = models.CharField(max_length=100)
 	slug = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.name
 	
 class Involved_companies(models.Model):
 	involved_companies_id = models.IntegerField(primary_key=True)
@@ -68,19 +81,31 @@ class Console(models.Model):
 	slug = models.CharField(max_length=100)
 	name = models.CharField(max_length=100)
 
+	def __str__(self):
+		return self.name
+
 class Genres(models.Model):
 	genre_id = models.IntegerField(primary_key=True)
 	slug = models.CharField(max_length=100)
 	name = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.name
 	
 class Wishlist(models.Model):
 	wishlist_items = models.ManyToManyField(Game)
 	owner = models.ForeignKey(User,on_delete=models.CASCADE)
+
+	def __str__(self):
+		return f'Wishlist Owner: {self.owner.username}'
 	
 class CurrentCart(models.Model):
 	owner = models.ForeignKey(User,on_delete=models.CASCADE)
 	total_price = MoneyField(decimal_places=2, max_digits=6,default=0, default_currency="EUR")
 	cart_items = models.JSONField(default=dict)
+
+	def __str__(self):
+		return f'Cart Owner: {self.owner.username}'
 
 class Orders(models.Model):
 	owner_id = models.ForeignKey(User,on_delete=models.CASCADE,null=True, blank=True)
@@ -89,3 +114,6 @@ class Orders(models.Model):
 	total_price = MoneyField(decimal_places=2, max_digits=6,default=0, default_currency="EUR")
 	order_status = models.CharField(max_length=24,default="Pending Payment")
 	order_date = models.DateField(null=True, blank=True)
+
+	def __str__(self):
+		return f'Order No.: #{self.order_number}'
