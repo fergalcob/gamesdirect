@@ -44,6 +44,7 @@ urlpatterns += [
     path('account/', include('store_pages.urls')),
     path('', include('checkout.urls')), # new
     path('', include('wishlist.urls')), # new
+    path('', include('cart.urls')), # new
 ]
 
 from django.views.generic import RedirectView

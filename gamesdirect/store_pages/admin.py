@@ -1,8 +1,10 @@
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
 from .resource import GameResource  
-from .models import  Game, Videos, Screenshots, Cover, Involved_companies, Company, Console, Genres, CurrentCart, Orders
+from .models import  Game, Videos, Screenshots, Cover, Involved_companies, Company, Console, Genres, Orders
 from wishlist.models import Wishlist
+from cart.models import CurrentCart
+
 
 # Register your models here.
 

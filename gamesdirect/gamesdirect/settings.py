@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'store_pages',
     'checkout',
     'wishlist',
+    'cart',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -77,7 +78,7 @@ TEMPLATES = [
             ],
         'libraries':{
             'get_consoles': 'store_pages.templatetags.console_links',
-            'get_cart': 'store_pages.templatetags.console_links',
+            'get_cart': 'cart.templatetags.getcart',
             'sign_up': 'store_pages.templatetags.console_links',  
             'check_wishlist': 'wishlist.templatetags.wishlist',         
        
