@@ -2,6 +2,8 @@ from django import template
 from store_pages.models import Game
 from wishlist.models import Wishlist
 
+register = template.Library()
+
 @register.simple_tag
 def check_wishlist(user, game_value,platform_value):
     game_to_check = Game.objects.get(Q(game_id=game_value) & Q(platform=platform_value))
