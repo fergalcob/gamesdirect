@@ -1,6 +1,8 @@
 from django import template
 from store_pages.models import Game
 from wishlist.models import Wishlist
+from django.db.models import Q
+
 
 register = template.Library()
 
