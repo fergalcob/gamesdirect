@@ -51,9 +51,9 @@
     <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">   {% if user.is_authenticated %}
       {% check_wishlist user games.game_id games.platform as wishlist_evaluation %}
       {% if wishlist_evaluation %}
-      <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3 game-{{ games.id }}" data-id="{{ games.id }}" data-game-id="{{ games.game_id}}" data-platform="{{ games.platform }}"></i>             
+      <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3 games-{{ games.id }}" data-id="{{ games.id }}" data-game-id="{{ games.game_id }}"  data-platform="{{ games.platform }}"></i>              
       {% else %}
-      <i class="fa-regular fa-heart wishlist me-3 game-{{ games.id }}" data-id="{{ games.id }}" data-game-id="{{ games.game_id}}" data-platform="{{ games.platform }}"></i>              {% endif %}
+      <i class="fa-regular fa-heart wishlist me-3 games-{{ games.id }}" data-id="{{ games.id }}" data-game-id="{{ games.game_id }}"  data-platform="{{ games.platform }}"></i>              {% endif %}
       {% if games.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart cart-button" data-product-id="{{ games.id }}" data-product-platform="{{ games.platform }}">Add To Cart</button>{% endif %}
       {% else %}
       <i type="button" class="fa-regular fa-heart wishlist-login me-3 games-{{ games.id }}" data-id="{{ games.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
