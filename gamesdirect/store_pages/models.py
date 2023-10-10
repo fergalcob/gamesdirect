@@ -92,13 +92,6 @@ class Genres(models.Model):
 	def __str__(self):
 		return self.name
 	
-class Wishlist(models.Model):
-	wishlist_items = models.ManyToManyField(Game)
-	owner = models.ForeignKey(User,on_delete=models.CASCADE)
-
-	def __str__(self):
-		return f'Wishlist Owner: {self.owner.username}'
-	
 class CurrentCart(models.Model):
 	owner = models.ForeignKey(User,on_delete=models.CASCADE)
 	total_price = MoneyField(decimal_places=2, max_digits=6,default=0, default_currency="EUR")

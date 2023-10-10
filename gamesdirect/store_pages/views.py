@@ -385,48 +385,6 @@ def index(request):
     return render(request, "store_pages/index.html", context=context)
 
 
-# View function for rendering the user's wishlist
-def my_wishlist(request):
-    if request.user.is_authenticated:
-        # Retrieve the user's wishlist and render it
-        my_wishlist = Wishlist.objects.get_or_create(owner=request.user)
-        context = {"my_wishlist": my_wishlist}
-        return render(request, "account/my_wishlist.html", context=context)
-
-
-# View function to add games to the user's wishlist
-def add_to_wishlist(request):
-    # Create or retrieve the user's wishlist
-    my_wishlist, created = Wishlist.objects.get_or_create(owner=request.user)
-    my_wishlist.save()
-    # Add the selected game to the wishlist
-    my_wishlist.wishlist_items.add(
-        Game.objects.get(
-            Q(game_id=request.POST["item_id"])
-            & Q(platform=request.POST["platform_id"])
-        )
-    )
-    print(my_wishlist.wishlist_items.all())
-    # Return to the index page after adding to wishlist
-    return render(request, "store_pages/index.html")
-
-
-# View function to remove games from the user's wishlist
-def remove_from_wishlist(request):
-    # Identify the game to remove
-    game_to_remove = Game.objects.get(
-        Q(game_id=request.POST["item_id"])
-        & Q(platform=request.POST["platform_id"])
-    )
-    # Retrieve and update the user's wishlist
-    my_wishlist = Wishlist.objects.get(owner=request.user)
-    my_wishlist.wishlist_items.remove(game_to_remove)
-    my_wishlist.save()
-
-    # Return to the wishlist page after removing from wishlist
-    return render(request, "account/my_wishlist.html")
-
-
 # View function for displaying games based on various
 # filters and sorting options
 def games(request):

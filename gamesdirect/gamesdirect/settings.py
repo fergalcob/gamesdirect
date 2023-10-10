@@ -34,6 +34,7 @@ CSRF_TRUSTED_ORIGINS = ['https://www.gamesdirect.shop', 'http://d3abwktql0jbq4.c
 INSTALLED_APPS = [
     'store_pages',
     'checkout',
+    'wishlist',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

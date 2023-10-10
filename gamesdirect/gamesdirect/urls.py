@@ -42,6 +42,7 @@ urlpatterns += [
     path('accounts/email/', CustomEmailView.as_view(), name="account_email"),
     path('accounts/', include('allauth.urls')),
     path('', include('checkout.urls')), # new
+    path('', include('wishlist.urls')), # new
 ]
 
 from django.views.generic import RedirectView
