@@ -17,7 +17,8 @@
         <p class="p-2 m-1 text-align-right sale-amount">-{{ wishlist_items.sale_discount }}%</p></div>
         {% endif %}
         <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">
-          <i class="fa-solid fa-heart-circle-xmark remove-wishlist wishlist-page game-{{ wishlist_items.id }} me-3" data-id="{{ wishlist_items.id }}" data-game-id="{{ wishlist_items.game_id }}" data-platform="{{ wishlist_items.platform }}"></i>  <button type="button" class="btn btn-secondary add-to-cart cart-button" data-product-id="{{ wishlist_items.id }}" data-product-platform="{{ wishlist_items.platform }}">Add To Cart</button>    
+          <i class="fa-solid fa-heart-circle-xmark remove-wishlist wishlist-page game-{{ wishlist_items.id }} me-3" data-id="{{ wishlist_items.id }}" data-game-id="{{ wishlist_items.game_id }}" data-platform="{{ wishlist_items.platform }}"></i>
+          {% if wishlist_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary out-of-stock" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart cart-button" data-product-id="{{ wishlist_items.id }}" data-product-platform="{{ wishlist_items.platform }}">Add To Cart</button>{% endif %}
       
           </div>
         </div>
