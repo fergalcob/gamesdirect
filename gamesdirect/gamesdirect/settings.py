@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'checkout',
     'wishlist',
     'cart',
+    'orders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
