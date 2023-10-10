@@ -66,7 +66,7 @@
   </div>
   <div class="stock_info align-self-end"><p class="text-end">{% if product.keys_in_stock|length > 5 %}In Stock{% elif product.keys_in_stock|length > 0 %}<span class="text-danger">Hurry! Only {{ product.keys_in_stock| length }} left in stock!</span>{% else %}Out Of Stock{% endif %}</p>
     {% if product.sale_discount > 0 %}<p class="text-end"><span class="text-decoration-line-through text-danger display-6">{{ product.base_price }}</span></p><p class="text-end"><span class="display-6">{{ product.sale_price }}</span></p>{% else %}<p class="text-end"><span class="display-6">{{ product.base_price }}</span></p>{% endif %}
-  <div class="text-end">{% if product.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-primary float-end" id="cart-button" data-product-id="{{ product.id }}" data-product-platform="{{ product.platform }}">Add To Cart</button>{% endif %}</div></div>
+  <div class="text-end">{% if product.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-primary float-end add-to-cart cart-button" data-product-id="{{ product.id }}" data-product-platform="{{ product.platform }}">Add To Cart</button>{% endif %}</div></div>
 </div>
 </div>
 </div>

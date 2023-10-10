@@ -41,6 +41,7 @@ urlpatterns += [
     path('accounts/password/change/', CustomPasswordChangeView.as_view(), name="account_change_password"),
     path('accounts/email/', CustomEmailView.as_view(), name="account_email"),
     path('accounts/', include('allauth.urls')),
+    path('account/', include('store_pages.urls')),
     path('', include('checkout.urls')), # new
     path('', include('wishlist.urls')), # new
 ]
