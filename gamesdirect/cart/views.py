@@ -75,7 +75,7 @@ def add_to_cart(request):
 
 # View function for removing an item from the cart
 def remove_from_cart(request):
-    remove_item = request.POST["cart_item_id"]
+    remove_item = request.POST["item_id"]
     get_user_cart = CurrentCart.objects.get(owner=request.user)
     cart_item_confirmation = next(
         (

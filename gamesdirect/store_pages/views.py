@@ -565,9 +565,14 @@ def games(request):
 
 # View function for displaying product details
 def products(request, pk):
+    print(pk)
     # Retrieving platform and product details
-    platform_id = request.GET["platform"]
-    product = Game.objects.get(Q(slug=pk) & Q(platform=platform_id))
+    if request.method == "GET":
+        platform_id = request.GET["platform"]
+        product = Game.objects.get(Q(slug=pk) & Q(platform=platform_id))
+    else:
+        platform_id = request.POST['platform']
+        product = Game.objects.get(id=request.POST['item_id'])
 
     # Retrieving related product data
     product_videos = Videos.objects.filter(game_ids__game_id=product.game_id)
