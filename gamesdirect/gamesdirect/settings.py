@@ -79,7 +79,7 @@ TEMPLATES = [
             'get_consoles': 'store_pages.templatetags.console_links',
             'get_cart': 'store_pages.templatetags.console_links',
             'sign_up': 'store_pages.templatetags.console_links',  
-            'check_wishlist': 'store_pages.templatetags.console_links',         
+            'check_wishlist': 'wishlist.templatetags.wishlist',         
        
             }
         },
