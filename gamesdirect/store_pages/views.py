@@ -35,10 +35,6 @@ import string
 # Configure logging
 logger = logging.getLogger(__name__)
 
-# Load data from a JSON file
-with open("store_pages/pc_response.json", encoding="utf-8") as f:
-    data = json.load(f)
-
 
 # Custom view for changing passwords
 class CustomPasswordChangeView(PasswordChangeView):
@@ -112,6 +108,9 @@ class CustomEmailView(EmailView):
 
 # Function for adding game data to the database
 def game_addition(data):
+    # Load data from a JSON file
+    with open("store_pages/pc_response.json", encoding="utf-8") as f:
+        data = json.load(f)
     for games in data:
         for platforms in games["game"]["platforms"]:
             if platforms in [6, 130, 167, 169]:
