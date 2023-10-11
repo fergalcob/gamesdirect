@@ -104,7 +104,6 @@ def stripe_webhook(request):
         status_update = Orders.objects.get(
             order_number=event["data"]["object"]["client_reference_id"]
         )
-        print(status_update.owner_id)
         empty_cart = CurrentCart.objects.get(owner=status_update.owner_id)
         empty_cart.delete()
         for items in status_update.order_items["current_cart"]:

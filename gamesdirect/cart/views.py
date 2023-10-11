@@ -13,7 +13,6 @@ def add_to_cart(request):
     add_product = Game.objects.get(id=request.POST["item_id"])
     cover = Cover.objects.get(game_ids=add_product)
     console = Console.objects.get(console_id=add_product.platform)
-    print('hello')
     # Handling the addition of products to the cart
     if created is True:
         test_cart.cart_items = {"current_cart": []}
@@ -27,7 +26,6 @@ def add_to_cart(request):
             "item_platform": add_product.platform,
             "item_console": console.name,
         }
-        print(cart_items)
         test_cart.cart_items["current_cart"].append(cart_items)
     else:
         # Check if the cart already contains the product
@@ -40,11 +38,9 @@ def add_to_cart(request):
             None,
         )
         if cart_item_test is not None:
-            print(cart_item_test["item_quantity"])
             cart_item_test["item_quantity"] = (
                 int(cart_item_test["item_quantity"]) + 1
             )
-            print(cart_item_test)
         else:
             # Adding the product to the cart
             cart_items = {
@@ -101,7 +97,6 @@ def remove_from_cart(request):
 # View function for updating the cart
 def update_cart(request):
     new_quantity = request.POST["item_quantity"]
-    print(new_quantity)
     if int(new_quantity) == 0:
         remove_from_cart(request)  # If quantity is 0, remove item from cart
     else:

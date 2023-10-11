@@ -152,7 +152,6 @@ def game_addition(data):
                         new_game_cover.save()
                         new_game_cover.game_ids.add(new_game)
                         # Download and process cover images
-                        print("https:" + new_game_cover.url_thumbnail)
                         urllib.request.urlretrieve(
                             new_game_cover.url_thumbnail,
                             str(new_game_cover.cover_id) + "_thumb.png",
@@ -540,7 +539,6 @@ def games(request):
         chosen_selector = "search"
         referrer = None
         search_query = request.POST["search_query"]
-        print(search_query)
         # Query games based on search query
         game_list = Game.objects.filter(name__icontains=search_query)
     else:
@@ -565,7 +563,6 @@ def games(request):
 
 # View function for displaying product details
 def products(request, pk):
-    print(pk)
     # Retrieving platform and product details
     if request.method == "GET":
         platform_id = request.GET["platform"]
@@ -594,7 +591,6 @@ def products(request, pk):
         & Q(game_ids__platform=platform_id)
         & Q(developer=True)
     )
-    print(product_developer)
 
     # Creating context for rendering product page
     context = {
@@ -648,7 +644,6 @@ mailchimp.set_config(
 def subscribe_view(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
-        print(form)
         if form.is_valid():
             try:
                 form_email = form.cleaned_data["email"]
