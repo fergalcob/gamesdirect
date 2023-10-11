@@ -556,4 +556,6 @@ The results of all testing performed can be found in the TESTING.md file [here](
 
 The guides [here](https://testdriven.io/blog/django-stripe-tutorial/) and [here](https://testdriven.io/blog/django-mailchimp/) at Testdriven were extremely useful in stepping through the process of setting up both the Stripe and Mailchimp integrations for use in the order handling process of the application.
 
+The guide at [RealPython](https://realpython.com/move-django-model/) helped in the process of moving the existing models between apps without the loss of existing data
+
 Thanks as well to [Stack Overflow](https://stackoverflow.com/) for their extensive knowledge on the causes of Python errors and the solutions to them.
