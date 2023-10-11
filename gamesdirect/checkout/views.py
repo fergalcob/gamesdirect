@@ -110,7 +110,7 @@ def stripe_webhook(request):
         for items in status_update.order_items["current_cart"]:
             items["activation_keys"] = []
             order_item = Game.objects.get(id=items["item_id"])
-            for number_of_keys in range(0, items["item_quantity"]):
+            for number_of_keys in range(0, int(items["item_quantity"])):
                 key = order_item.keys_in_stock[number_of_keys]
                 items["activation_keys"].append(key)
                 order_item.keys_in_stock.pop(number_of_keys)
