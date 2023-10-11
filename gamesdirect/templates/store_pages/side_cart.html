@@ -11,8 +11,8 @@
           <li class="nav-item">
             
             <div class="row w-100"><div class="col-2"><img src="{{ individual_items.item_thumbnail }}" alt="Thumbnail of cover for {{ individual_items.item_name }}"></div><div class="col-8 offset-2"><a class="nav-link active" aria-current="page" href="{% url 'products' individual_items.item_slug %}?platform={{ individual_items.item_platform }}">{{ individual_items.item_name }}({{ individual_items.item_console }})</a><p>Price: €{{ individual_items.item_price }}</p></div></div>
-            <p>QTY: <span class="border border-dark rounded-pill py-2 px-3 ms-3"><span id="decrement-quantity" class=" btn btn-link rounded-circle text-decoration-none pb-3"> - </span><span data-quantity="{{ individual_items.item_quantity}}" data-product-id="{{ individual_items.item_id }}"> {{ individual_items.item_quantity }} </span>
-                <span id="increment-quantity" class=" btn btn-link rounded-circle text-decoration-none pb-3"> + </span> <span class="btn" data-product-id="{{ individual_items.item_id }}" id="remove-from-cart" ><i class="fa-solid fa-trash-can"></i></span></span></p>
+            <p>QTY: <span class="border border-dark rounded-pill py-2 px-3 ms-3"><span id="decrement-quantity" class=" btn btn-link rounded-circle text-decoration-none pb-3"> - </span><span data-quantity="{{ individual_items.item_quantity}}" data-product-platform="{{ individual_items.item_platform }}" data-product-id="{{ individual_items.item_id }}"> {{ individual_items.item_quantity }} </span>
+                <span id="increment-quantity" class=" btn btn-link rounded-circle text-decoration-none pb-3"> + </span> <span class="btn" data-product-platform="{{ individual_items.item_platform }}" data-product-id="{{ individual_items.item_id }}" id="remove-from-cart" ><i class="fa-solid fa-trash-can"></i></span></span></p>
           </li>
           {% endfor %}
           {% if items.cart_items.current_cart|length > 0 %}

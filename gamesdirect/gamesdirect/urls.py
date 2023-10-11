@@ -37,12 +37,14 @@ path('admin/', admin.site.urls),
 from django.urls import include
 
 urlpatterns += [
+    path('', include('checkout.urls')), # new
+    path('', include('wishlist.urls')), # new
+    path('', include('cart.urls')), # new
+    path('', include('orders.urls')), # new
     path('store_pages/', include('store_pages.urls')),
     path('accounts/password/change/', CustomPasswordChangeView.as_view(), name="account_change_password"),
     path('accounts/email/', CustomEmailView.as_view(), name="account_email"),
     path('accounts/', include('allauth.urls')),
-    path('', include('checkout.urls')), # new
-    path('', include('wishlist.urls')), # new
 ]
 
 from django.views.generic import RedirectView
