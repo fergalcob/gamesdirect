@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from store_pages.models import *
 from wishlist.models import Wishlist
-from django.db.models import Q
-
 
 # Create your views here.
 
@@ -10,8 +8,7 @@ from django.db.models import Q
 def my_wishlist(request):
     if request.user.is_authenticated:
         # Retrieve the user's wishlist and render it
-        my_wishlist, created = Wishlist.objects.get_or_create(owner=request.user)
-
+        my_wishlist = Wishlist.objects.get_or_create(owner=request.user)
         context = {"my_wishlist": my_wishlist}
         return render(request, "account/my_wishlist.html", context=context)
 

@@ -78,9 +78,9 @@
         <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">   {% if user.is_authenticated %}
           {% check_wishlist user new_items.game_id new_items.platform as wishlist_evaluation %}
           {% if wishlist_evaluation %}
-          <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3 game-{{ new_items.id }}" data-id="{{ new_items.id }}" data-game-id="{{ new_items.game_id }}"  data-platform="{{ new_items.platform }}"></i>              
+          <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3 games-{{ new_items.id }}" data-id="{{ new_items.id }}" data-game-id="{{ new_items.game_id }}" data-platform="{{ new_items.platform }}"></i>             
           {% else %}
-          <i class="fa-regular fa-heart wishlist me-3 game-{{ new_items.id }}" data-id="{{ new_items.id }}" data-game-id="{{ new_items.game_id }}"  data-platform="{{ new_items.platform }}"></i>              {% endif %}
+          <i class="fa-regular fa-heart wishlist me-3 games-{{ new_items.id }}" data-id="{{ new_items.id }}" data-game-id="{{ new_items.game_id }}" data-platform="{{ new_items.platform }}"></i>              {% endif %}
           {% if new_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary out-of-stock" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart cart-button" data-product-id="{{ new_items.id }}" data-product-platform="{{ new_items.platform }}">Add To Cart</button>{% endif %}
           {% else %}
           <i class="fa-regular fa-heart wishlist-login me-3 games-{{ new_items.id }}" data-id="{{ new_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
@@ -123,9 +123,9 @@
         <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.6)">     <div class="d-flex justify-content-center align-items-center h-100">   {% if user.is_authenticated %}
           {% check_wishlist user top_items.game_id top_items.platform as wishlist_evaluation %}
           {% if wishlist_evaluation %}
-          <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3 game-{{ top_items.id }}" data-id="{{ top_items.id }}" data-game-id="{{ top_items.game_id }}"  data-platform="{{ top_items.platform }}"></i>              
+          <i class="fa-solid fa-heart-circle-xmark remove-wishlist me-3 game-{{ top_items.id }}" data-id="{{ top_items.id }}" data-game-id="{{ new_items.game_id }}"  data-platform="{{ top_items.platform }}"></i>              
           {% else %}
-          <i class="fa-regular fa-heart wishlist me-3 game-{{ top_items.id }}" data-id="{{ top_items.id }}" data-game-id="{{ top_items.game_id }}"  data-platform="{{ top_items.platform }}"></i>              {% endif %}
+          <i class="fa-regular fa-heart wishlist me-3 game-{{ top_items.id }}" data-id="{{ top_items.id }}" data-game-id="{{ new_items.game_id }}"  data-platform="{{ top_items.platform }}"></i>              {% endif %}
           {% if top_items.keys_in_stock|length == 0 %}<button type="button" class="btn btn-lg btn-primary" disabled>Out Of Stock</button>{% else %}<button type="button" class="btn btn-secondary add-to-cart cart-button"  data-product-id="{{ top_items.id }}" data-product-platform="{{ top_items.platform }}">Add To Cart</button>{% endif %}
           {% else %}
           <i  class="fa-regular fa-heart wishlist-login me-3 games-{{ top_items.id }}" data-id="{{ top_items.id }}"  data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
